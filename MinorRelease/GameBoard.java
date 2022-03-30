@@ -678,7 +678,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
                             if (rotatingTileOnRight(i, j)){
 
-                                if (verifyAdjacentSquare(i,j+1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j)){
+                                if (verifyAdjacentSquare(i,j+1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
                                     
                                     placeTile(i, j);
                                     frameManager.setRoundStatus("select domino");
@@ -693,7 +693,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
                             else if (rotatingTileOnLeft(i, j)){
 
-                                if (verifyAdjacentSquare(i,j-1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j)){
+                                if (verifyAdjacentSquare(i,j-1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
 
                                     placeTile(i,j);
                                     frameManager.setRoundStatus("select domino");
@@ -706,7 +706,7 @@ public class GameBoard extends GameFrame implements ActionListener
                             }
                             else if (rotatingTileBelow(i, j)){
 
-                                if (verifyAdjacentSquare(i+1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j)){
+                                if (verifyAdjacentSquare(i+1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
 
                                     placeTile(i,j);
                                     frameManager.setRoundStatus("select domino");
@@ -720,7 +720,7 @@ public class GameBoard extends GameFrame implements ActionListener
                             }
                             else if (rotatingTileOnTop(i, j))
                             {
-                                if (verifyAdjacentSquare(i-1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j)){
+                                if (verifyAdjacentSquare(i-1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
 
                                     placeTile(i,j);
                                     frameManager.setRoundStatus("select domino");
@@ -972,43 +972,389 @@ public class GameBoard extends GameFrame implements ActionListener
         return false;
     }
 
-    // private boolean verifyDimensions(int i, int j){
+     
+    private boolean verifyDimensions(int i, int j)
+    {
 
-    //     if ((leftMostDominoColumn <= j <= rightMostDominoColumn) && (topMostDominoRow <= i <= bottomMostDominoRow))
-    //     {
-    //         return true;
-    //     }
+        if(rotatingTileOnRight(i, j))
+        {
+            if (((leftMostDominoColumn <= j) && (j+1 <= rightMostDominoColumn)) && ((topMostDominoRow <= i) && (i <= bottomMostDominoRow)))
+            {
+                return true;
+            }
 
-    //     if(rotatingTileOnRight(i, j))
-    //     {
-    //         if ((j+1) >= rightMostDominoColumn)
-    //         {
-    //             if (((j+1)-leftMostDominoColumn) <= 5)
-    //             {
-    //                 rightMostDominoColumn = j+1;
-    //                 return true;
-    //             }
-    //         }
+            if (((j+1) > rightMostDominoColumn)  && ((topMostDominoRow <= i) && (i <= bottomMostDominoRow))) //1
+            {
+                if(((j+1) - leftMostDominoColumn) < 5)
+                {   
+                    System.out.println("1");
+                    rightMostDominoColumn = j+1;
+                    return true;
+                }
+            }
+
+            if ((j < leftMostDominoColumn) && ((topMostDominoRow <= i) && (i <= bottomMostDominoRow))) //2
+            {
+                if((rightMostDominoColumn - j) < 5)
+                {
+                    System.out.println("2");
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((leftMostDominoColumn <= j) && ((j+1) <= rightMostDominoColumn)) && (i < topMostDominoRow)) //3
+            {
+                if((bottomMostDominoRow - i) < 5)
+                {
+                    System.out.println("3");
+                    topMostDominoRow = i;
+                    return true;
+                }
+            }
+
+            if (((leftMostDominoColumn <= j) && ((j+1) <= rightMostDominoColumn)) && (i > bottomMostDominoRow)) //4
+            {
+                if((i - topMostDominoRow) < 5)
+                {
+                    System.out.println("4");
+                    bottomMostDominoRow = i;
+                    return true;
+                }
+            }
+
+            if (((j+1) > rightMostDominoColumn) && (i > bottomMostDominoRow)) //5
+            {
+                if((((j+1) - leftMostDominoColumn) < 5) && ((i - topMostDominoRow) < 5))
+                {
+                    System.out.println("5");
+                    bottomMostDominoRow = i;
+                    rightMostDominoColumn = j+1;
+                    return true;
+                }
+            }
             
-    //     }
+            if (((j+1) > rightMostDominoColumn) && (i < topMostDominoRow)) //6
+            {
+                if((((j+1) - leftMostDominoColumn) < 5) && ((bottomMostDominoRow - i) < 5))
+                {
+                    System.out.println("6");
+                    topMostDominoRow = i;
+                    rightMostDominoColumn = j+1;
+                    return true;
+                }
+            }
 
-    //     if(rotatingTileOnLeft(i, j))
-    //     {
-           
-    //     }
-
-    //     if(rotatingTileBelow(i, j))
-    //     {
+            if (((j) < leftMostDominoColumn) && (i > bottomMostDominoRow)) //7
+            {
+                if(((rightMostDominoColumn - j) < 5) && ((i - topMostDominoRow) < 5))
+                {
+                    System.out.println("7");
+                    bottomMostDominoRow = i;
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
             
-    //     }
+            if (((j) < leftMostDominoColumn) && (i < topMostDominoRow)) //8
+            {
+                if(((rightMostDominoColumn - j) < 5) && ((bottomMostDominoRow - i) < 5))
+                {
+                    System.out.println("8");
+                    topMostDominoRow = i;
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
 
-    //     if(rotatingTileOnTop(i, j))
-    //     {
+            return false;
             
-    //     }
+        }
 
-    // }
-    // }
+        if(rotatingTileOnLeft(i, j))
+        {
+           if (((leftMostDominoColumn <= j - 1) && (j <= rightMostDominoColumn)) && ((topMostDominoRow <= i) && (i <= bottomMostDominoRow)))
+            {
+                return true;
+            }
+            
+            if (((j) > rightMostDominoColumn)  && ((topMostDominoRow <= i) && (i <= bottomMostDominoRow))) //1
+            {
+                if(((j) - leftMostDominoColumn) < 5)
+                {   
+                    System.out.println("1");
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if ((j-1 < leftMostDominoColumn) && ((topMostDominoRow <= i) && (i <= bottomMostDominoRow))) //2
+            {
+                if((rightMostDominoColumn - (j-1)) < 5)
+                {
+                    System.out.println("2");
+                    leftMostDominoColumn = j-1;
+                    return true;
+                }
+            }
+
+            if (((leftMostDominoColumn <= j-1) && ((j) <= rightMostDominoColumn)) && (i < topMostDominoRow)) //3
+            {
+                if((bottomMostDominoRow - i) < 5)
+                {
+                    System.out.println("3");
+                    topMostDominoRow = i;
+                    return true;
+                }
+            }
+
+            if (((leftMostDominoColumn <= j-1) && ((j) <= rightMostDominoColumn)) && (i > bottomMostDominoRow)) //4
+            {
+                if((i - topMostDominoRow) < 5)
+                {
+                    System.out.println("4");
+                    bottomMostDominoRow = i;
+                    return true;
+                }
+            }
+
+            if (((j) > rightMostDominoColumn) && (i > bottomMostDominoRow)) //5
+            {
+                if((((j) - leftMostDominoColumn) < 5) && ((i - topMostDominoRow) < 5))
+                {
+                    System.out.println("5");
+                    bottomMostDominoRow = i;
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+            
+            if (((j) > rightMostDominoColumn) && (i < topMostDominoRow)) //6
+            {
+                if((((j) - leftMostDominoColumn) < 5) && ((bottomMostDominoRow - i) < 5))
+                {
+                    System.out.println("6");
+                    topMostDominoRow = i;
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((j-1) < leftMostDominoColumn) && (i > bottomMostDominoRow)) //7
+            {
+                if(((rightMostDominoColumn - (j-1)) < 5) && ((i - topMostDominoRow) < 5))
+                {
+                    System.out.println("7");
+                    bottomMostDominoRow = i;
+                    leftMostDominoColumn = j-1;
+                    return true;
+                }
+            }
+            
+            if (((j-1) < leftMostDominoColumn) && (i < topMostDominoRow)) //8
+            {
+                if(((rightMostDominoColumn - (j-1)) < 5) && ((bottomMostDominoRow - i) < 5))
+                {
+                    System.out.println("8");
+                    topMostDominoRow = i;
+                    leftMostDominoColumn = j-1;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        if(rotatingTileBelow(i, j))
+        {
+            if (((leftMostDominoColumn <= j) && (j <= rightMostDominoColumn)) && ((topMostDominoRow <= i) && ((i+1) <= bottomMostDominoRow)))
+            {
+                return true;
+            }
+
+            if (((i+1) > bottomMostDominoRow)  && ((leftMostDominoColumn <= j) && (j <= rightMostDominoColumn))) //1
+            {
+                if(((i+1) - topMostDominoRow) < 5)
+                {   
+                    System.out.println("1");
+                    bottomMostDominoRow = i+1;
+                    return true;
+                }
+            }
+
+            if ((i < topMostDominoRow) && ((leftMostDominoColumn <= j) && (j <= rightMostDominoColumn))) //2
+            {
+                if((bottomMostDominoRow - i) < 5)
+                {
+                    System.out.println("2");
+                    bottomMostDominoRow = i;
+                    return true;
+                }
+            }
+
+            if (((topMostDominoRow <= i) && ((i+1) <= bottomMostDominoRow)) && (j < leftMostDominoColumn)) //3
+            {
+                if((rightMostDominoColumn - j) < 5)
+                {
+                    System.out.println("3");
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((topMostDominoRow <= i) && ((i+1) <= bottomMostDominoRow)) && (j > rightMostDominoColumn)) //4
+            {
+                if((j - leftMostDominoColumn) < 5)
+                {
+                    System.out.println("4");
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((i+1) > bottomMostDominoRow) && (j > rightMostDominoColumn)) //5
+            {
+                if((((i+1) - topMostDominoRow) < 5) && ((j - leftMostDominoColumn) < 5))
+                {
+                    System.out.println("5");
+                    bottomMostDominoRow = i+1;
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+            
+            if (((i+1) > bottomMostDominoRow) && (j < leftMostDominoColumn)) //6
+            {
+                if((((i+1) - topMostDominoRow) < 5) && ((rightMostDominoColumn - j) < 5))
+                {
+                    System.out.println("5");
+                    bottomMostDominoRow = i+1;
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((i) < topMostDominoRow) && (j > rightMostDominoColumn)) //7
+            {
+                if(((bottomMostDominoRow - i) < 5) && ((j - leftMostDominoColumn) < 5))
+                {
+                    System.out.println("5");
+                    topMostDominoRow = i;
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+            
+            if (((i) < topMostDominoRow) && (j < leftMostDominoColumn)) //8
+            {
+                if(((bottomMostDominoRow - i) < 5) && ((rightMostDominoColumn - j) < 5))
+                {
+                    System.out.println("5");
+                    topMostDominoRow = i;
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        if(rotatingTileOnTop(i, j))
+        {
+            if (((leftMostDominoColumn <= j) && (j <= rightMostDominoColumn)) && ((topMostDominoRow <= (i-1)) && (i <= bottomMostDominoRow)))
+            {
+                return true;
+            }
+
+            if (((i) > bottomMostDominoRow)  && ((leftMostDominoColumn <= j) && (j <= rightMostDominoColumn))) //1
+            {
+                if(((i) - topMostDominoRow) < 5)
+                {   
+                    System.out.println("1");
+                    bottomMostDominoRow = i;
+                    return true;
+                }
+            }
+
+            if (((i-1) < topMostDominoRow) && ((leftMostDominoColumn <= j) && (j <= rightMostDominoColumn))) //2
+            {
+                if((bottomMostDominoRow - (i-1)) < 5)
+                {
+                    System.out.println("2");
+                    bottomMostDominoRow = i-1;
+                    return true;
+                }
+            }
+
+            if (((topMostDominoRow <= (i-1)) && (i <= bottomMostDominoRow)) && (j < leftMostDominoColumn)) //3
+            {
+                if((rightMostDominoColumn - j) < 5)
+                {
+                    System.out.println("3");
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((topMostDominoRow <= (i-1)) && (i <= bottomMostDominoRow)) && (j > rightMostDominoColumn)) //4
+            {
+                if((j - leftMostDominoColumn) < 5)
+                {
+                    System.out.println("4");
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((i) > bottomMostDominoRow) && (j > rightMostDominoColumn)) //5
+            {
+                if((((i) - topMostDominoRow) < 5) && ((j - leftMostDominoColumn) < 5))
+                {
+                    System.out.println("5");
+                    bottomMostDominoRow = i;
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+            
+            if (((i) > bottomMostDominoRow) && (j < leftMostDominoColumn)) //6
+            {
+                if(((i - topMostDominoRow) < 5) && ((rightMostDominoColumn - j) < 5))
+                {
+                    System.out.println("5");
+                    bottomMostDominoRow = i;
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            if (((i-1) < topMostDominoRow) && (j > rightMostDominoColumn)) //7
+            {
+                if(((bottomMostDominoRow - (i-1)) < 5) && ((j - leftMostDominoColumn) < 5))
+                {
+                    System.out.println("5");
+                    topMostDominoRow = i-1;
+                    rightMostDominoColumn = j;
+                    return true;
+                }
+            }
+            
+            if (((i-1) < topMostDominoRow) && (j < leftMostDominoColumn)) //8
+            {
+                if(((bottomMostDominoRow - (i-1)) < 5) && ((rightMostDominoColumn - j) < 5))
+                {
+                    System.out.println("5");
+                    topMostDominoRow = i-1;
+                    leftMostDominoColumn = j;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return false;
+    }
 
     private boolean verifyWithInKingdom(int i, int j)
     {
