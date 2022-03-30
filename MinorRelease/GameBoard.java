@@ -17,6 +17,9 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -99,12 +102,12 @@ public class GameBoard extends GameFrame implements ActionListener
         bottomPanel.setPreferredSize(new Dimension(650,60));
         bottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
-
+/*
         JButton quit = new JButton("Quit");
         quit.setAlignmentX(Component.LEFT_ALIGNMENT);
         quit.addActionListener(e-> quit());
         bottomPanel.add(quit);
-
+*/
         Dimension minSize = new Dimension(15, 50);
         Dimension prefSize = new Dimension(15, 50);
         Dimension maxSize = new Dimension(15, 50);
@@ -472,11 +475,29 @@ public class GameBoard extends GameFrame implements ActionListener
         gridSquares[4][4].setIcon(new ImageIcon(startingTile));
         gridSquares[4][4].setBackground(Color.BLACK);
 
+        makeMenuBar();
         pack();
         setVisible(false);
 
     }
 	
+    private void makeMenuBar()
+    {
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu fileMenu = new JMenu("File");
+        menuBar.add(fileMenu);
+
+        JMenuItem saveItem = new JMenuItem("Save");
+        saveItem.addActionListener(e->save());
+        fileMenu.add(saveItem);
+
+        JMenuItem quitItem = new JMenuItem("Quit");
+        quitItem.addActionListener(e->quit());
+        fileMenu.add(quitItem);
+    }
+    
     public void actionPerformed(ActionEvent e)
     {	
 		Domino current;
@@ -1090,10 +1111,10 @@ public class GameBoard extends GameFrame implements ActionListener
             }
     }
 
-    //private void endTurn()
-    //{
-    //    frameManager.nextPlayersTurn();
-    //}
+    private void save()
+    {
+        /* PLACE SAVE FUNCTION HERE */
+    }
 
     private void rotateLeft(Domino domino)
     {
