@@ -987,7 +987,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((j+1) - leftMostDominoColumn) < 5)
                 {   
-                    System.out.println("1");
+                    
                     rightMostDominoColumn = j+1;
                     return true;
                 }
@@ -997,7 +997,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((rightMostDominoColumn - j) < 5)
                 {
-                    System.out.println("2");
+                    
                     leftMostDominoColumn = j;
                     return true;
                 }
@@ -1007,7 +1007,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((bottomMostDominoRow - i) < 5)
                 {
-                    System.out.println("3");
+                    
                     topMostDominoRow = i;
                     return true;
                 }
@@ -1017,7 +1017,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((i - topMostDominoRow) < 5)
                 {
-                    System.out.println("4");
+                    
                     bottomMostDominoRow = i;
                     return true;
                 }
@@ -1027,7 +1027,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((((j+1) - leftMostDominoColumn) < 5) && ((i - topMostDominoRow) < 5))
                 {
-                    System.out.println("5");
+                    
                     bottomMostDominoRow = i;
                     rightMostDominoColumn = j+1;
                     return true;
@@ -1038,7 +1038,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((((j+1) - leftMostDominoColumn) < 5) && ((bottomMostDominoRow - i) < 5))
                 {
-                    System.out.println("6");
+                    
                     topMostDominoRow = i;
                     rightMostDominoColumn = j+1;
                     return true;
@@ -1049,7 +1049,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((rightMostDominoColumn - j) < 5) && ((i - topMostDominoRow) < 5))
                 {
-                    System.out.println("7");
+                    
                     bottomMostDominoRow = i;
                     leftMostDominoColumn = j;
                     return true;
@@ -1060,7 +1060,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((rightMostDominoColumn - j) < 5) && ((bottomMostDominoRow - i) < 5))
                 {
-                    System.out.println("8");
+                    
                     topMostDominoRow = i;
                     leftMostDominoColumn = j;
                     return true;
@@ -1082,17 +1082,17 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((j) - leftMostDominoColumn) < 5)
                 {   
-                    System.out.println("1");
+                    
                     rightMostDominoColumn = j;
                     return true;
                 }
-            }
+            }   
 
             if ((j-1 < leftMostDominoColumn) && ((topMostDominoRow <= i) && (i <= bottomMostDominoRow))) //2
             {
                 if((rightMostDominoColumn - (j-1)) < 5)
                 {
-                    System.out.println("2");
+                    
                     leftMostDominoColumn = j-1;
                     return true;
                 }
@@ -1102,7 +1102,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((bottomMostDominoRow - i) < 5)
                 {
-                    System.out.println("3");
+                    
                     topMostDominoRow = i;
                     return true;
                 }
@@ -1112,7 +1112,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((i - topMostDominoRow) < 5)
                 {
-                    System.out.println("4");
+                    
                     bottomMostDominoRow = i;
                     return true;
                 }
@@ -1122,7 +1122,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((((j) - leftMostDominoColumn) < 5) && ((i - topMostDominoRow) < 5))
                 {
-                    System.out.println("5");
+                    
                     bottomMostDominoRow = i;
                     rightMostDominoColumn = j;
                     return true;
@@ -1133,7 +1133,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((((j) - leftMostDominoColumn) < 5) && ((bottomMostDominoRow - i) < 5))
                 {
-                    System.out.println("6");
+                    
                     topMostDominoRow = i;
                     rightMostDominoColumn = j;
                     return true;
@@ -1144,7 +1144,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((rightMostDominoColumn - (j-1)) < 5) && ((i - topMostDominoRow) < 5))
                 {
-                    System.out.println("7");
+                    
                     bottomMostDominoRow = i;
                     leftMostDominoColumn = j-1;
                     return true;
@@ -1155,7 +1155,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((rightMostDominoColumn - (j-1)) < 5) && ((bottomMostDominoRow - i) < 5))
                 {
-                    System.out.println("8");
+                    
                     topMostDominoRow = i;
                     leftMostDominoColumn = j-1;
                     return true;
@@ -1176,7 +1176,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((i+1) - topMostDominoRow) < 5)
                 {   
-                    System.out.println("1");
+                    
                     bottomMostDominoRow = i+1;
                     return true;
                 }
@@ -1186,8 +1186,8 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((bottomMostDominoRow - i) < 5)
                 {
-                    System.out.println("2");
-                    bottomMostDominoRow = i;
+                    
+                    topMostDominoRow = i;
                     return true;
                 }
             }
@@ -1196,7 +1196,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((rightMostDominoColumn - j) < 5)
                 {
-                    System.out.println("3");
+                    
                     leftMostDominoColumn = j;
                     return true;
                 }
@@ -1206,7 +1206,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((j - leftMostDominoColumn) < 5)
                 {
-                    System.out.println("4");
+                    
                     rightMostDominoColumn = j;
                     return true;
                 }
@@ -1216,7 +1216,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((((i+1) - topMostDominoRow) < 5) && ((j - leftMostDominoColumn) < 5))
                 {
-                    System.out.println("5");
+                    
                     bottomMostDominoRow = i+1;
                     rightMostDominoColumn = j;
                     return true;
@@ -1227,7 +1227,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((((i+1) - topMostDominoRow) < 5) && ((rightMostDominoColumn - j) < 5))
                 {
-                    System.out.println("5");
+                    
                     bottomMostDominoRow = i+1;
                     leftMostDominoColumn = j;
                     return true;
@@ -1238,7 +1238,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((bottomMostDominoRow - i) < 5) && ((j - leftMostDominoColumn) < 5))
                 {
-                    System.out.println("5");
+                    
                     topMostDominoRow = i;
                     rightMostDominoColumn = j;
                     return true;
@@ -1249,7 +1249,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((bottomMostDominoRow - i) < 5) && ((rightMostDominoColumn - j) < 5))
                 {
-                    System.out.println("5");
+                    
                     topMostDominoRow = i;
                     leftMostDominoColumn = j;
                     return true;
@@ -1270,7 +1270,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((i) - topMostDominoRow) < 5)
                 {   
-                    System.out.println("1");
+                    
                     bottomMostDominoRow = i;
                     return true;
                 }
@@ -1280,8 +1280,8 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((bottomMostDominoRow - (i-1)) < 5)
                 {
-                    System.out.println("2");
-                    bottomMostDominoRow = i-1;
+                    
+                    topMostDominoRow = i-1;
                     return true;
                 }
             }
@@ -1290,7 +1290,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((rightMostDominoColumn - j) < 5)
                 {
-                    System.out.println("3");
+                    
                     leftMostDominoColumn = j;
                     return true;
                 }
@@ -1300,7 +1300,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((j - leftMostDominoColumn) < 5)
                 {
-                    System.out.println("4");
+                    
                     rightMostDominoColumn = j;
                     return true;
                 }
@@ -1310,7 +1310,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if((((i) - topMostDominoRow) < 5) && ((j - leftMostDominoColumn) < 5))
                 {
-                    System.out.println("5");
+                    
                     bottomMostDominoRow = i;
                     rightMostDominoColumn = j;
                     return true;
@@ -1321,7 +1321,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((i - topMostDominoRow) < 5) && ((rightMostDominoColumn - j) < 5))
                 {
-                    System.out.println("5");
+                    
                     bottomMostDominoRow = i;
                     leftMostDominoColumn = j;
                     return true;
@@ -1332,7 +1332,7 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((bottomMostDominoRow - (i-1)) < 5) && ((j - leftMostDominoColumn) < 5))
                 {
-                    System.out.println("5");
+                    
                     topMostDominoRow = i-1;
                     rightMostDominoColumn = j;
                     return true;
@@ -1343,7 +1343,6 @@ public class GameBoard extends GameFrame implements ActionListener
             {
                 if(((bottomMostDominoRow - (i-1)) < 5) && ((rightMostDominoColumn - j) < 5))
                 {
-                    System.out.println("5");
                     topMostDominoRow = i-1;
                     leftMostDominoColumn = j;
                     return true;
