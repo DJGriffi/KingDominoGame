@@ -14,8 +14,9 @@ public class ColourSettingsFrame extends GameFrame
 	private JComboBox<String> comboBox;
 	/**
 	 * Create the frame.
+	 * @throws IOException
 	 */
-	public ColourSettingsFrame(FrameManager frameManager) 
+	public ColourSettingsFrame(FrameManager frameManager) throws IOException 
 	{
 		super();
         this.frameManager = frameManager;

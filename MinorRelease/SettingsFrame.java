@@ -1,4 +1,5 @@
 import java.awt.GridBagConstraints;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -9,8 +10,9 @@ public class SettingsFrame extends GameFrame
 	private FrameManager frameManager;
 	/**
 	 * Create the frame.
+	 * @throws IOException
 	 */
-	public SettingsFrame(FrameManager frameManager) 
+	public SettingsFrame(FrameManager frameManager) throws IOException 
 	{
 		super();
         this.frameManager = frameManager;

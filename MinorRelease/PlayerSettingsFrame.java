@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -38,7 +39,7 @@ public class PlayerSettingsFrame extends GameFrame
 	private JTextField player1Name, player2Name, player3Name, player4Name;
 	private JComboBox<Hue> colorBox1, colorBox2, colorBox3, colorBox4;
 	
-	public PlayerSettingsFrame(FrameManager frameManager) 
+	public PlayerSettingsFrame(FrameManager frameManager) throws IOException 
 	{
 		super();
 		this.frameManager = frameManager;
@@ -54,19 +55,27 @@ public class PlayerSettingsFrame extends GameFrame
     {
 		JPanel playerSelectPanel= new JPanel();
 		playerSelectPanel.setLayout( new FlowLayout());
+		playerSelectPanel.setOpaque(false);
+
 		JLabel topLabel= new JLabel("Select number of players");
 		
 		JPanel humanPlayerPanel=new JPanel();
+		humanPlayerPanel.setOpaque(false);
 		JLabel humanPlayerLabel= new JLabel("Select number of human players");
 		
 		JPanel bottomPanel=new JPanel();
-		
+		bottomPanel.setOpaque(false);
+
 		JPanel inputPanel1=new JPanel();
+		inputPanel1.setOpaque(false);
 		JPanel inputPanel2=new JPanel();
+		inputPanel2.setOpaque(false);
 		
 		JPanel playerPanel=new JPanel();
+		playerPanel.setOpaque(false);
 		
 		JPanel AIinfoPanel=new JPanel();
+		AIinfoPanel.setOpaque(false);
 		JLabel AIinfo =new JLabel("");
 		JButton easyAI=new JButton("Easy");
 		easyAI.addActionListener(e->difficulty=0);
@@ -74,12 +83,15 @@ public class PlayerSettingsFrame extends GameFrame
 		easyAI.addActionListener(e->difficulty=1);
 		
 		JPanel playerInfoPanel=new JPanel();
+		playerInfoPanel.setOpaque(false);
 		JLabel playerInfoLabel=new JLabel("");
 		
 		JPanel humanPlayerInfoPanel=new JPanel();
+		humanPlayerInfoPanel.setOpaque(false);
 		JLabel humanPlayerInfoLabel=new JLabel("");
 		
 		JPanel AIselectionPanel = new JPanel();
+		AIselectionPanel.setOpaque(false);
 		JLabel AIselectionLabel = new JLabel("Please select AI difficulty (Easy by default): ");
 		
 		/*

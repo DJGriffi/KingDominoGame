@@ -1,10 +1,16 @@
 import java.awt.Color;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Graphics;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 
@@ -13,14 +19,24 @@ public class GameFrame extends JFrame
     private Color backgroundColour;
     private Color buttonColour;
     private Color textColour;
+    private Image splash;
 
 
-    public GameFrame()
+    public GameFrame() throws IOException
     {
         super();
         setBounds(100, 100, 700, 700);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        splash = ImageIO.read(getClass().getResource("/images/Title.png"));
+        splash = splash.getScaledInstance(700, 700, java.awt.Image.SCALE_SMOOTH);
+        setContentPane(new JPanel(){
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(splash, 0, 0, null);
+            }
+    });
 		getContentPane().setLayout(new GridBagLayout());
         setColours();
     }
