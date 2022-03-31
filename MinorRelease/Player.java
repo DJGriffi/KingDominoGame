@@ -98,4 +98,11 @@ public class Player
 	{
 		tookTurn = turnTook;
 	}
+
+	public void removeDomino(Domino dominoToRemove)
+	{
+		//System.out.println(dominoes.size());
+		dominoes.removeIf(domino -> domino == dominoToRemove);
+		//System.out.println(dominoes.size());
+	}
 }

@@ -345,4 +345,10 @@ public class KingDomino
 	{
 		return currentPlayersTurn;
 	}
+
+	public void removeDomino()
+	{
+		Player player = currentDomino.getPickedBy();
+		player.removeDomino(currentDomino);
+	}
 }

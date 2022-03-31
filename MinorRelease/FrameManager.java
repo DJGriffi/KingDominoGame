@@ -547,4 +547,9 @@ public class FrameManager
     {
         kingDomino.setRoundStatus(roundStatus);
     }
+
+    public void removeDomino()
+    {
+        kingDomino.removeDomino();
+    }
 }

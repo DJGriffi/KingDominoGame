@@ -38,7 +38,7 @@ public class GameBoard extends GameFrame implements ActionListener
     private JPanel rightPanel, topPanel, centerPanel, bottomPanel;
     private JLabel round, whoTurn, doThis, dominosLeft;
     private JButton rotateTile2, rotateTile4, rotateTile5, rotateTile6, rotateTile8;
-	private JButton leftRotate, rightRotate, endTurn;
+	private JButton leftRotate, rightRotate, discardDomino, endTurn;
     private JButton currentTile11, currentTile12, currentTile21, currentTile22, currentTile31, currentTile32, currentTile41, currentTile42;
     private JButton nextRndTile11, nextRndTile12, nextRndTile21, nextRndTile22, nextRndTile31, nextRndTile32, nextRndTile41, nextRndTile42; 
     private FrameManager frameManager;
@@ -158,6 +158,13 @@ public class GameBoard extends GameFrame implements ActionListener
         JPanel rightCenterTopPanel = new JPanel();
         rightCenterTopPanel.setPreferredSize(new Dimension(650,40));
         rightCenterTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+
+        minSize = new Dimension(210, 30);
+        prefSize = new Dimension(210, 30);
+        maxSize = new Dimension(210, 30);
+
+        rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+
         leftRotate = new JButton("Left");
         leftRotate.addActionListener(e-> rotateLeft(frameManager.getCurrentDomino()));
         rightCenterTopPanel.add(leftRotate);
@@ -169,6 +176,14 @@ public class GameBoard extends GameFrame implements ActionListener
         rightRotate.addActionListener(e-> rotateRight(frameManager.getCurrentDomino()));
         rightCenterTopPanel.add(rightRotate);
 
+        minSize = new Dimension(50, 30);
+        prefSize = new Dimension(50, 30);
+        maxSize = new Dimension(50, 30);
+        rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+
+        discardDomino = new JButton("Discard domino");
+        discardDomino.addActionListener(e -> discardDomino(frameManager.getCurrentDomino()));
+        rightCenterTopPanel.add(discardDomino);
 
         rightCenterPanel.add(rightCenterTopPanel, BorderLayout.NORTH);
 
@@ -1538,6 +1553,33 @@ public class GameBoard extends GameFrame implements ActionListener
 			rotateTile4.setBackground(Color.WHITE);
             rotateTile4.setIcon(null);
 		}
+    }
+
+    private void discardDomino(Domino domino)
+    {
+        if (rotateTile5.getBackground() != Color.WHITE){
+
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard this domino?", "Confirm", JOptionPane.YES_NO_OPTION); 
+
+                if(confirm == JOptionPane.YES_OPTION){
+
+                    rotateTile2.setBackground(Color.WHITE);
+                    rotateTile2.setIcon(null);
+                    rotateTile4.setBackground(Color.WHITE);
+                    rotateTile4.setIcon(null);
+                    rotateTile5.setBackground(Color.WHITE);
+                    rotateTile5.setIcon(null);
+                    rotateTile6.setBackground(Color.WHITE);
+                    rotateTile6.setIcon(null);
+                    rotateTile8.setBackground(Color.WHITE);
+                    rotateTile8.setIcon(null);
+
+                    frameManager.removeDomino();
+                    frameManager.setRoundStatus("select domino");
+                    frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+                }
+
+        }
     }
 
     public void setCurrentRndDominos(ArrayList<Domino> currentRndDominos)
