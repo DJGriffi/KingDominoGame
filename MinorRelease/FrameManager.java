@@ -63,6 +63,10 @@ public class FrameManager
     public void showPlayer1GameBoard()
     {
         player1GameBoard.makeVisible();
+        if(player1GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 0) {
+        	System.out.println("AI 1's turn");//DEBUG
+        	player1GameBoard.doAIaction();
+        }
     }
 
     public void hidePlayer1GameBoard()
@@ -73,6 +77,10 @@ public class FrameManager
     public void showPlayer2GameBoard()
     {
         player2GameBoard.makeVisible();
+        if(player2GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 1) {
+        	System.out.println("AI 2's turn");//DEBUG
+        	player2GameBoard.doAIaction();
+        }
     }
 
     public void hidePlayer2GameBoard()
@@ -83,6 +91,10 @@ public class FrameManager
     public void showPlayer3GameBoard()
     {
         player3GameBoard.makeVisible();
+        if(player3GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 2) {
+        	System.out.println("AI 3's turn");//DEBUG
+        	player3GameBoard.doAIaction();
+        }
     }
 
     public void hidePlayer3GameBoard()
@@ -93,6 +105,10 @@ public class FrameManager
     public void showPlayer4GameBoard()
     {
         player4GameBoard.makeVisible();
+        if(player4GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 3) {
+        	System.out.println("AI 4's turn"); //DEBUG
+        	player4GameBoard.doAIaction();
+        }
     }
 
     public void hidePlayer4GameBoard()
@@ -205,7 +221,21 @@ public class FrameManager
     {
         kingDomino.createHumanPlayer(playerName, playerColor, playerNumber);
     }
-
+    
+    public void createAIPlayer(String playerName, Color playerColor, int playerNumber, int difficulty)
+    {
+    	kingDomino.createAIplayer(playerName, playerColor, playerNumber, difficulty);
+    	if(playerNumber == 1) {
+    		player1GameBoard.setAsAIboard();
+    	} else if (playerNumber == 2) {
+    		player2GameBoard.setAsAIboard();
+    	} else if (playerNumber == 3) {
+    		player3GameBoard.setAsAIboard();
+    	} else if (playerNumber == 4) {
+    		player4GameBoard.setAsAIboard();
+    	}
+    }
+    
     public void setPlayerNameOnBoard()
     {
         ArrayList<Player> players = kingDomino.getListOfPlayers();

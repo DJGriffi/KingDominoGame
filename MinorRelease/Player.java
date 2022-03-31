@@ -5,8 +5,9 @@ public class Player
 {
 	private String name;
 	private int points, playerNumber;
-	private boolean AI;
 	private Color colour;
+	private int difficulty;              //0 for easy, 1 for hard
+	private boolean AI;
 	private ArrayList<Domino> dominoes;
 	private boolean tookTurn;
 	
@@ -14,20 +15,23 @@ public class Player
 	{
 		this.name=name;
 		this.colour= colour;
-		this.AI= false;
 		this.playerNumber = playerNumber;
+		this.AI = false;
 		tookTurn = false;
 		points=0;
 		dominoes = new ArrayList<>();
 	}
 
-	public Player(String name, Color colour, int playerNumber, boolean isAI)
+	public Player(String name, Color colour, int playerNumber, int difficulty)
 	{
 		this.name=name;
 		this.colour= colour;
-		this.AI= isAI;
 		this.playerNumber = playerNumber;
+		this.difficulty = difficulty;
+		this.AI = true;
+		tookTurn = false;
 		points=0;
+		dominoes = new ArrayList<>();
 	}
 
 	public String getName() 
@@ -39,22 +43,32 @@ public class Player
 	{
 		this.name = name;
 	}
-
+	
+	public boolean isAI()
+	{
+		return AI;
+	}
+	
 	public int getPoints() 
 	{
 		return points;
 	}
 
+	public void setEasy()
+	{
+		difficulty = 0;
+	}
+	
+	public void setHard()
+	{
+		difficulty = 1;
+	}
+	
 	public void setPoints(int points) 
 	{
 		this.points = points;
 	}
-
-	public boolean isAI() 
-	{
-		return AI;
-	}
-
+	
 	public Color getColour() 
 	{
 		return colour;

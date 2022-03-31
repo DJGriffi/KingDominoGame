@@ -34,7 +34,7 @@ public class PlayerSettingsFrame extends GameFrame
 	private int AIplayers;
 	private int totalPlayers;
 	private int humanPlayers;
-	private String difficulty;
+	private int difficulty;
 	private JTextField player1Name, player2Name, player3Name, player4Name;
 	private JComboBox<Hue> colorBox1, colorBox2, colorBox3, colorBox4;
 	
@@ -47,7 +47,7 @@ public class PlayerSettingsFrame extends GameFrame
 		AIplayers=0;
 		totalPlayers=0;
 		humanPlayers=0;
-		difficulty="";
+		difficulty=0;
 	}
 	
 	public void makeFrame()
@@ -69,9 +69,9 @@ public class PlayerSettingsFrame extends GameFrame
 		JPanel AIinfoPanel=new JPanel();
 		JLabel AIinfo =new JLabel("");
 		JButton easyAI=new JButton("Easy");
-		easyAI.addActionListener(e->difficulty="easy");
+		easyAI.addActionListener(e->difficulty=0);
 		JButton hardAI=new JButton("Hard");
-		easyAI.addActionListener(e->difficulty="hard");
+		easyAI.addActionListener(e->difficulty=1);
 		
 		JPanel playerInfoPanel=new JPanel();
 		JLabel playerInfoLabel=new JLabel("");
@@ -80,7 +80,7 @@ public class PlayerSettingsFrame extends GameFrame
 		JLabel humanPlayerInfoLabel=new JLabel("");
 		
 		JPanel AIselectionPanel = new JPanel();
-		JLabel AIselectionLabel = new JLabel("Please select AI difficulty: ");
+		JLabel AIselectionLabel = new JLabel("Please select AI difficulty (Easy by default): ");
 		
 		/*
 		 *  Buttons for selecting total number of players
@@ -261,7 +261,7 @@ public class PlayerSettingsFrame extends GameFrame
 		AIplayers=0;
 		totalPlayers=0;
 		humanPlayers=0;
-		difficulty="";
+		difficulty=0;
 		setVisible(false);
 		frameManager.showGameModeFrame();
 		
@@ -269,19 +269,51 @@ public class PlayerSettingsFrame extends GameFrame
 	
 	public void next()
 	{	
-		if(totalPlayers==humanPlayers+AIplayers && totalPlayers!=0 && humanPlayers !=0) {
+		if(totalPlayers==humanPlayers + AIplayers && totalPlayers!=0 && humanPlayers !=0) {
 			setVisible(false);
 			if (totalPlayers == 2){
 				Hue player1Colour = (Hue) colorBox1.getSelectedItem();
 				frameManager.createHumanPlayer(player1Name.getText(), player1Colour.getColor(), 1);
-
+				if(AIplayers == 1) {
+					Hue player2Colour = (Hue) colorBox2.getSelectedItem();
+					frameManager.createAIPlayer(player2Name.getText(), player2Colour.getColor(), 2, difficulty);
+				} else {
 				Hue player2Colour = (Hue) colorBox2.getSelectedItem();
 				frameManager.createHumanPlayer(player2Name.getText(), player2Colour.getColor(), 2);
+				}
 			}
-			else if(totalPlayers ==4){
+			else if(totalPlayers == 4){
 				Hue player1Colour = (Hue) colorBox1.getSelectedItem();
 				frameManager.createHumanPlayer(player1Name.getText(), player1Colour.getColor(), 1);
+				if (AIplayers == 3) {
+					Hue player2Colour = (Hue) colorBox2.getSelectedItem();
+					frameManager.createAIPlayer(player2Name.getText() + "(AI)", player2Colour.getColor(), 2, difficulty);
 
+					Hue player3Colour = (Hue) colorBox3.getSelectedItem();
+					frameManager.createAIPlayer(player3Name.getText() + "(AI)", player3Colour.getColor(), 3, difficulty);
+
+					Hue player4Colour = (Hue) colorBox4.getSelectedItem();
+					frameManager.createAIPlayer(player4Name.getText() + "(AI)", player4Colour.getColor(), 4, difficulty);
+				} else if (AIplayers == 2) {
+					Hue player2Colour = (Hue) colorBox2.getSelectedItem();
+					frameManager.createHumanPlayer(player2Name.getText(), player2Colour.getColor(), 2);
+					
+					Hue player3Colour = (Hue) colorBox3.getSelectedItem();
+					frameManager.createAIPlayer(player3Name.getText() + "(AI)", player3Colour.getColor(), 3, difficulty);
+
+					Hue player4Colour = (Hue) colorBox4.getSelectedItem();
+					frameManager.createAIPlayer(player4Name.getText() + "(AI)", player4Colour.getColor(), 4, difficulty);
+					
+				} else if (AIplayers == 1) {
+					Hue player2Colour = (Hue) colorBox2.getSelectedItem();
+					frameManager.createHumanPlayer(player2Name.getText(), player2Colour.getColor(), 2);
+
+					Hue player3Colour = (Hue) colorBox3.getSelectedItem();
+					frameManager.createHumanPlayer(player3Name.getText(), player3Colour.getColor(), 3);
+					
+					Hue player4Colour = (Hue) colorBox4.getSelectedItem();
+					frameManager.createAIPlayer(player4Name.getText() + "(AI)", player4Colour.getColor(), 4, difficulty);
+				} else {
 				Hue player2Colour = (Hue) colorBox2.getSelectedItem();
 				frameManager.createHumanPlayer(player2Name.getText(), player2Colour.getColor(), 2);
 
@@ -290,6 +322,7 @@ public class PlayerSettingsFrame extends GameFrame
 
 				Hue player4Colour = (Hue) colorBox4.getSelectedItem();
 				frameManager.createHumanPlayer(player4Name.getText(), player4Colour.getColor(), 4);
+				}
 			}
 			frameManager.setPlayerNameOnBoard();
 			frameManager.startingRound();
