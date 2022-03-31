@@ -164,9 +164,9 @@ public class GameBoard extends GameFrame implements ActionListener
         bottomPanel.add(discardDomino);
         //bottomPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        Dimension minSize = new Dimension(screenSize.width * 3/8 * 3/5, screenSize.height * 1/20);
-        Dimension prefSize = new Dimension(screenSize.width * 3/8 * 3/5, screenSize.height * 1/20);
-        Dimension maxSize = new Dimension(screenSize.width * 3/8 * 3/5, screenSize.height * 1/20);
+        Dimension minSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
+        Dimension prefSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
+        Dimension maxSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
 
         bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
