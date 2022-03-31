@@ -20,8 +20,8 @@ public class Domino
         this.numericalVal = numericalVal;
         this.tile1Image = tile1Image;
         this.tile2Image = tile2Image;
-        this.tile1Image = tile1Image.getScaledInstance(143, 110, java.awt.Image.SCALE_SMOOTH);
-        this.tile2Image = tile2Image.getScaledInstance(143, 110, java.awt.Image.SCALE_SMOOTH);
+        this.tile1Image = tile1Image.getScaledInstance(190, 105, java.awt.Image.SCALE_SMOOTH);
+        this.tile2Image = tile2Image.getScaledInstance(190, 105, java.awt.Image.SCALE_SMOOTH);//143,110
         available = true;
         played = false;
         tile1x = 0;

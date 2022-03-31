@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,6 +18,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -45,10 +47,12 @@ public class GameBoard extends GameFrame implements ActionListener
     private ArrayList<Domino> currentDominos;
     private ArrayList<Domino> nextDominos; 
     private boolean AIboard;
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public GameBoard(FrameManager frameManager, int playerNum) throws IOException
     {
         super();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.frameManager = frameManager;
         this.playerNum = playerNum;
         this.AIboard = false;
@@ -57,7 +61,7 @@ public class GameBoard extends GameFrame implements ActionListener
         bottomMostDominoRow = 4;
         leftMostDominoColumn = 4;
         rightMostDominoColumn = 4;
-        setBounds(100, 100, 2000, 1500);
+        //setBounds(100, 100, 2000, 1500);
         getContentPane().setLayout(new BorderLayout());
         makeBoard();
     }
@@ -67,13 +71,15 @@ public class GameBoard extends GameFrame implements ActionListener
         /***********************************************/
         /*Create panel to the right of the playing area*/
         rightPanel = new JPanel();
-        rightPanel.setPreferredSize(new Dimension(700,1500));
+        //rightPanel.setPreferredSize(new Dimension(700,1500));
+        rightPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, screenSize.height));
         rightPanel.setLayout(new BorderLayout());
 
         /****************************************************/
         /* Creating top panel with currentDominos round information*/
         topPanel = new JPanel();
-        topPanel.setPreferredSize(new Dimension(650,60));
+        //topPanel.setPreferredSize(new Dimension(650,60));
+        topPanel.setSize(screenSize.width * 1/3, 60);
         topPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
         JPanel topLeft = new JPanel();
@@ -113,9 +119,9 @@ public class GameBoard extends GameFrame implements ActionListener
         quit.addActionListener(e-> quit());
         bottomPanel.add(quit);
 */
-        Dimension minSize = new Dimension(15, 50);
-        Dimension prefSize = new Dimension(15, 50);
-        Dimension maxSize = new Dimension(15, 50);
+        Dimension minSize = new Dimension(40, 50);
+        Dimension prefSize = new Dimension(40, 50);
+        Dimension maxSize = new Dimension(40, 50);
         bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
         JButton viewPlayer1 = new JButton("View Player 1");
@@ -483,15 +489,16 @@ public class GameBoard extends GameFrame implements ActionListener
         getContentPane().add(rightPanel, BorderLayout.EAST);
 
         centerPanel = new JPanel();
-        centerPanel.setBounds(100, 100, 1300, 1500);
-        centerPanel.setPreferredSize(new Dimension(1300, 1500));
+        //centerPanel.setBounds(100, 100, 1300, 1500);
+        //centerPanel.setPreferredSize(new Dimension(1300, 1500));
+        centerPanel.setPreferredSize(new Dimension(screenSize.width * 2/3, screenSize.height));
         centerPanel.setLayout(new GridLayout(ROWS,COLUMNS,2,2));
         addGridSquares();
-        getContentPane().add(centerPanel, BorderLayout.CENTER);
+        getContentPane().add(centerPanel, BorderLayout.WEST);
 
         //setPlayerNum();
         Image startingTile = ImageIO.read(getClass().getResource("/images/StartingTile.png"));
-        startingTile = startingTile.getScaledInstance(140, 105, java.awt.Image.SCALE_SMOOTH);
+        startingTile = startingTile.getScaledInstance(185, 110, java.awt.Image.SCALE_SMOOTH);
         gridSquares[4][4].setIcon(new ImageIcon(startingTile));
         gridSquares[4][4].setBackground(Color.BLACK);
 

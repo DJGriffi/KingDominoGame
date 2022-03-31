@@ -19,6 +19,7 @@ public class GameFrame extends JFrame
     {
         super();
         setBounds(100, 100, 700, 700);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridBagLayout());
         setColours();
