@@ -321,9 +321,9 @@ public class GameBoard extends GameFrame implements ActionListener
         rightCenterCenterTopBottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         JLabel currentRndTiles = new JLabel("Current Round Dominoes");
         rightCenterCenterTopBottomPanel.add(currentRndTiles);
-        Dimension label1MinSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
-        Dimension label1PrefSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
-        Dimension label1MaxSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
+        Dimension label1MinSize = new Dimension(screenSize.width * 3/8 * 3/10, screenSize.height * 1/20);
+        Dimension label1PrefSize = new Dimension(screenSize.width * 3/8 * 3/10, screenSize.height * 1/20);
+        Dimension label1MaxSize = new Dimension(screenSize.width * 3/8 * 3/10, screenSize.height * 1/20);
         rightCenterCenterTopBottomPanel.add(new Box.Filler(label1MinSize, label1PrefSize, label1MaxSize));
         JLabel nextRndTiles = new JLabel("Next Round Dominoes");
         rightCenterCenterTopBottomPanel.add(nextRndTiles);
