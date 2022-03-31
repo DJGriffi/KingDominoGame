@@ -79,7 +79,7 @@ public class GameBoard extends GameFrame implements ActionListener
         /* Creating top panel with currentDominos round information*/
         topPanel = new JPanel();
         //topPanel.setPreferredSize(new Dimension(650,60));
-        topPanel.setSize(screenSize.width * 1/3, 60);
+        topPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, 60));
         topPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
         JPanel topLeft = new JPanel();
@@ -91,6 +91,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
 
         JPanel topCenter = new JPanel();
+        //topCenter.setPreferredSize(new Dimension(screenSize.width * 1/3, 50));
         topCenter.setPreferredSize(new Dimension(400,50));
         whoTurn = new JLabel("Player One's turn");
         doThis = new JLabel("Do this thing this turn");
@@ -110,7 +111,8 @@ public class GameBoard extends GameFrame implements ActionListener
         /*****************************************************************/
         /* Creating bottom panel to hold the 'End Turn' and 'Quit' Buttons*/
         bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(650,60));
+        setPreferredSize(new Dimension(screenSize.width * 1/3, 60));
+        //bottomPanel.setPreferredSize(new Dimension(650,60));
         bottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
 /*
@@ -162,7 +164,8 @@ public class GameBoard extends GameFrame implements ActionListener
         rightCenterPanel.setLayout(new BorderLayout());
 
         JPanel rightCenterTopPanel = new JPanel();
-        rightCenterTopPanel.setPreferredSize(new Dimension(650,40));
+        setPreferredSize(new Dimension(screenSize.width * 1/3, 40));
+        //rightCenterTopPanel.setPreferredSize(new Dimension(650,40));
         rightCenterTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
         minSize = new Dimension(210, 30);
@@ -293,7 +296,8 @@ public class GameBoard extends GameFrame implements ActionListener
         /*********************************************************************/
         /**Create panel to hold the currentDominos round tiles and next round tiles**/
         JPanel rightCenterCenterTopBottomPanel = new JPanel();
-        rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(550,60));
+        //rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(550,60));
+        rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, 60));
         rightCenterCenterTopBottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         JLabel currentRndTiles = new JLabel("Current Round Dominoes");
         rightCenterCenterTopBottomPanel.add(currentRndTiles);
@@ -339,7 +343,8 @@ public class GameBoard extends GameFrame implements ActionListener
 
         JPanel rightCenterCenterCenterPanel = new JPanel();
         rightCenterCenterCenterPanel.setLayout(new GridLayout(4,5,2,2));
-        rightCenterCenterCenterPanel.setPreferredSize(new Dimension(500, 600));
+        rightCenterCenterCenterPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, 600));
+        //rightCenterCenterCenterPanel.setPreferredSize(new Dimension(500, 600));
 
         currentTile11 = new JButton();
         currentTile11.setPreferredSize(new Dimension(50,50));
