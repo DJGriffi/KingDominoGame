@@ -16,6 +16,7 @@ public class FrameManager
     private ColourSettingsFrame colourSettingsFrame;
     private SettingsFrame settingsFrame;
     private PlayerSettingsFrame playerSettingsFrame;
+    private ResultsFrame resultsFrame;
 
     public FrameManager(KingDomino kingDomino) throws IOException
     {
@@ -38,6 +39,7 @@ public class FrameManager
         settingsFrame = new SettingsFrame(this);
         playerSettingsFrame = new PlayerSettingsFrame(this);
         
+        
     }
 
     public void showMainFrame()
@@ -59,6 +61,16 @@ public class FrameManager
     {
         gameModeFrame.makeInvisible();
     }
+
+    public ArrayList<Player> getListOfPlayers()
+	{
+		return kingDomino.getListOfPlayers();
+	}
+
+    public Player highestScoringPlayer()
+	{
+		return kingDomino.highestScoringPlayer();
+	}
 
     public void showPlayer1GameBoard()
     {
@@ -145,6 +157,18 @@ public class FrameManager
     {
     	playerSettingsFrame.makeInvisible();
     }
+
+    public void showResultsFrame()
+    {
+    	resultsFrame = new ResultsFrame(this);
+    }
+    
+    public void hideResultsFrame()
+    {
+    	resultsFrame.makeInvisible();
+    }
+
+    
     
     public void regenerateFrames() throws IOException
     {
@@ -162,6 +186,21 @@ public class FrameManager
     public void startingRound()
     {
         kingDomino.startingRound();
+    }
+
+    public boolean allPlayersTookTurn()
+	{
+		return kingDomino.allPlayersTookTurn();
+	}
+
+    public void updateLastRoundTracker()
+    {
+        kingDomino.updateLastRoundTracker();
+    }
+
+    public int lastRoundTracker()
+    {
+        return kingDomino.lastRoundTracker();
     }
 
     public void setCurrentRndDominos(ArrayList<Domino> currentRndDominos)

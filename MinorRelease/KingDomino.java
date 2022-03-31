@@ -13,7 +13,7 @@ public class KingDomino
 	private ArrayList<Domino> nextRndDominos;
 	private ArrayList<Player> players;
 	private DeckOfDominos dealer;
-	private int roundNum, numOfPlayers, currentPlayersTurn, previousPlayersTurn;
+	private int roundNum, numOfPlayers, currentPlayersTurn, previousPlayersTurn, lastRoundTracker;
 	private Random rand;
 	private String roundStatus;
 	private Domino currentDomino;
@@ -30,6 +30,7 @@ public class KingDomino
         frameManager.showMainFrame();
 		roundNum = 1;
 		numOfPlayers = 2;
+		lastRoundTracker = 0;
 		roundStatus = "starting round";
 
 	}
@@ -339,6 +340,44 @@ public class KingDomino
 	{
 		int playa = player - 1;
 		return players.get(playa).getTookTurn();
+	}
+
+	public boolean allPlayersTookTurn()
+	{
+		
+		for (int i = 0; i < frameManager.getNumOfPlayers(); i++)
+		{
+			if (players.get(i).getTookTurn() == true)
+			{
+				System.out.println("" + i);
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public Player highestScoringPlayer()
+	{
+		Player highestScoringPlayer = players.get(0);
+		for (int i = 1; i < frameManager.getNumOfPlayers(); i++)
+		{
+			if (players.get(i).getPoints() > highestScoringPlayer.getPoints())
+			{
+				highestScoringPlayer = players.get(i);
+			}
+		}
+		return highestScoringPlayer;
+	}
+
+	public void updateLastRoundTracker()
+	{
+		lastRoundTracker +=1;
+	}
+
+	public int lastRoundTracker()
+	{
+		return lastRoundTracker;
 	}
 	
 	public int getCurrentPlayer() 

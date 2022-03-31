@@ -37,6 +37,7 @@ public class GameBoard extends GameFrame implements ActionListener
     private int leftMostDominoColumn;
     private int rightMostDominoColumn;
     private int playerNum;
+    private int lastRoundTracker;
     private Random rand;
     private JPanel rightPanel, topPanel, centerPanel, bottomPanel;
     private JLabel round, whoTurn, doThis, dominosLeft;
@@ -62,7 +63,8 @@ public class GameBoard extends GameFrame implements ActionListener
         bottomMostDominoRow = 4;
         leftMostDominoColumn = 4;
         rightMostDominoColumn = 4;
-        //setBounds(100, 100, 2000, 1500);
+        lastRoundTracker = 0;
+        setBounds(100, 100, 2000, 1500);
         getContentPane().setLayout(new BorderLayout());
         makeBoard();
     }
@@ -659,7 +661,15 @@ public class GameBoard extends GameFrame implements ActionListener
                 frameManager.setRoundStatus("place domino");   //place dominos
                 frameManager.nextPlayersTurn();
             }
-        }        
+        }
+
+        else if (frameManager.lastRoundTracker() == 4)
+        {   
+            if (e.getSource() == endTurn)
+            {
+                frameManager.showResultsFrame();
+            }
+        }         
 /*
 		else if (e.getSource() == leftRotate)
 		{
@@ -1483,6 +1493,10 @@ public class GameBoard extends GameFrame implements ActionListener
             rotateTile6.setBackground(Color.WHITE);
             rotateTile5.setIcon(null);
             rotateTile6.setIcon(null);
+            if(((frameManager.getNumOfPlayers() == 2) && (frameManager.getRoundNum() == 6)) || ((frameManager.getNumOfPlayers() == 4) && (frameManager.getRoundNum() == 12)))
+            {
+                frameManager.updateLastRoundTracker();
+            }
         }
 
         if(rotatingTileOnLeft(i, j))
@@ -1495,6 +1509,10 @@ public class GameBoard extends GameFrame implements ActionListener
             rotateTile4.setBackground(Color.WHITE);
             rotateTile5.setIcon(null);
             rotateTile4.setIcon(null);
+            if(((frameManager.getNumOfPlayers() == 2) && (frameManager.getRoundNum() == 6)) || ((frameManager.getNumOfPlayers() == 4) && (frameManager.getRoundNum() == 12)))
+            {
+                frameManager.updateLastRoundTracker();
+            }
         }
 
         if(rotatingTileBelow(i, j))
@@ -1507,6 +1525,10 @@ public class GameBoard extends GameFrame implements ActionListener
             rotateTile8.setBackground(Color.WHITE);
             rotateTile5.setIcon(null);
             rotateTile8.setIcon(null);
+            if(((frameManager.getNumOfPlayers() == 2) && (frameManager.getRoundNum() == 6)) || ((frameManager.getNumOfPlayers() == 4) && (frameManager.getRoundNum() == 12)))
+            {
+                frameManager.updateLastRoundTracker();
+            }
         }
 
         if(rotatingTileOnTop(i, j))
@@ -1519,6 +1541,10 @@ public class GameBoard extends GameFrame implements ActionListener
             rotateTile2.setBackground(Color.WHITE);
             rotateTile5.setIcon(null);
             rotateTile2.setIcon(null);
+            if(((frameManager.getNumOfPlayers() == 2) && (frameManager.getRoundNum() == 6)) || ((frameManager.getNumOfPlayers() == 4) && (frameManager.getRoundNum() == 12)))
+            {
+                frameManager.updateLastRoundTracker();
+            }
         }
 
     }
@@ -1650,6 +1676,11 @@ public class GameBoard extends GameFrame implements ActionListener
                     frameManager.removeDomino();
                     frameManager.setRoundStatus("select domino");
                     frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+
+                    if(((frameManager.getNumOfPlayers() == 2) && (frameManager.getRoundNum() == 6)) || ((frameManager.getNumOfPlayers() == 4) && (frameManager.getRoundNum() == 12)))
+                    {
+                        frameManager.updateLastRoundTracker();
+                    }
                 }
 
         }

@@ -338,7 +338,6 @@ public class PlayerSettingsFrame extends GameFrame
 			}
 			frameManager.setPlayerNameOnBoard();
 			frameManager.startingRound();
-			
 		} else {
 			JOptionPane.showMessageDialog(null, "Invalid settings inputted! Please select valid settings for your game.", null, JOptionPane.PLAIN_MESSAGE);
 		}	
