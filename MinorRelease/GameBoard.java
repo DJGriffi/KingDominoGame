@@ -79,16 +79,20 @@ public class GameBoard extends GameFrame implements ActionListener
         /****************************************************/
         /* Creating top panel with currentDominos round information*/
         topPanel = new JPanel();
-        topPanel.setLayout(new FlowLayout());
+        topPanel.setLayout(new BorderLayout());
         //topPanel.setPreferredSize(new Dimension(650,60));
         topPanel.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 2/20));
         topPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         
-        Dimension minSize = new Dimension(screenSize.width * 3/8 * 1/15, screenSize.height * 1/20);
-        Dimension prefSize = new Dimension(screenSize.width * 3/8 * 1/15, screenSize.height * 1/20);
-        Dimension maxSize = new Dimension(screenSize.width * 3/8 * 1/15, screenSize.height * 1/20);
+        //Dimension minSize = new Dimension(screenSize.width * 3/8 * 1/15, screenSize.height * 1/20);
+        //Dimension prefSize = new Dimension(screenSize.width * 3/8 * 1/15, screenSize.height * 1/20);
+        //Dimension maxSize = new Dimension(screenSize.width * 3/8 * 1/15, screenSize.height * 1/20);
 
-        topPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+        //topPanel.add(new Box.Filler(minSize, prefSize, maxSize), BorderLayout.NORTH);
+         
+        JPanel topNorth = new JPanel();
+        topNorth.setLayout(new FlowLayout());
+        topNorth.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
 
         JPanel topLeft = new JPanel();
         //topLeft.setPreferredSize(new Dimension(125,20));
@@ -98,30 +102,35 @@ public class GameBoard extends GameFrame implements ActionListener
         //round.setHorizontalAlignment(SwingConstants.LEFT);
         topLeft.add(round);
         //round.setAlignmentX(Component.LEFT_ALIGNMENT);
-        topPanel.add(topLeft);
+        topNorth.add(topLeft);
 
-        minSize = new Dimension(screenSize.width * 3/8 * 3/10, screenSize.height * 1/20);
-        prefSize = new Dimension(screenSize.width * 3/8 * 3/10, screenSize.height * 1/20);
-        maxSize = new Dimension(screenSize.width * 3/8 * 3/10, screenSize.height * 1/20);
+        Dimension minSize = new Dimension(screenSize.width * 3/8 * 1/10, screenSize.height * 1/20);
+        Dimension prefSize = new Dimension(screenSize.width * 3/8 * 1/10, screenSize.height * 1/20);
+        Dimension maxSize = new Dimension(screenSize.width * 3/8 * 1/10, screenSize.height * 1/20);
 
-        topPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+        topNorth.add(new Box.Filler(minSize, prefSize, maxSize));
 
         JPanel topRight = new JPanel();
         //topRight.setPreferredSize(new Dimension(150,20));
-        //topRight.setPreferredSize(new Dimension(screenSize.width * 3/8 * 2/9, screenSize.height * 1/9));
+        //topRight.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
         //topRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
         dominosLeft = new JLabel("Dominos remaining: 0");
         topRight.add(dominosLeft);
-        topPanel.add(topRight);
+        topNorth.add(topRight);
+
+        topPanel.add(topNorth, BorderLayout.NORTH);
+
+        //topPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
         JPanel topCenter = new JPanel();
-        //topCenter.setPreferredSize(new Dimension(screenSize.width * 3/8 * 5/9, screenSize.height * 1/9));
+        topCenter.setLayout(new FlowLayout());
+        topCenter.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
         //topCenter.setPreferredSize(new Dimension(400,50));
         whoTurn = new JLabel("Player One's turn");
         doThis = new JLabel("Do this thing this turn");
         topCenter.add(whoTurn);
         topCenter.add(doThis);
-        topPanel.add(topCenter);
+        topPanel.add(topCenter, BorderLayout.SOUTH);
 
 
         rightPanel.add(topPanel, BorderLayout.NORTH);
