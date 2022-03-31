@@ -36,9 +36,11 @@ public class GameFrame extends JFrame
                 super.paintComponent(g);
                 g.drawImage(splash, 0, 0, null);
             }
-    });
+        });
 		getContentPane().setLayout(new GridBagLayout());
         setColours();
+        setResizable(false);
+
     }
 
     public void setColours()

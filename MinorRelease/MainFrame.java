@@ -26,7 +26,8 @@ public class MainFrame extends GameFrame
 
 	private void makeFrame()
 	{
-		title = new JLabel("KingDomino");
+		
+		title = new JLabel();
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		gbc.gridx = 5;
 		gbc.gridy = 0;
