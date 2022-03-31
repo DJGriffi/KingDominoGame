@@ -1901,14 +1901,18 @@ public class GameBoard extends GameFrame implements ActionListener
 
     public void viewPlayer3()
     {
-        makeInvisible();
-        frameManager.showPlayer3GameBoard();
+        if (frameManager.getNumOfPlayers() == 4){
+            makeInvisible();
+            frameManager.showPlayer3GameBoard();
+        }
     }
 
     public void viewPlayer4()
     {
-        makeInvisible();
-        frameManager.showPlayer4GameBoard();
+        if (frameManager.getNumOfPlayers() == 4){
+            makeInvisible();
+            frameManager.showPlayer3GameBoard();
+        }
     }
 
     public void setAsAIboard() 
