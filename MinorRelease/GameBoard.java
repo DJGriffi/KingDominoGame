@@ -1958,15 +1958,13 @@ public class GameBoard extends GameFrame implements ActionListener
     
     public void doAIaction()
     {
-    	//if first round, pick from current pile and end turn
-    	//if not first round, place tile, pick next tile and end turn
+    	//if first round, pick from current pile and enable end turn
+    	//if not first round, place tile, pick next tile and enable end turn
     	if (frameManager.getRoundStatus().equals("starting round") && frameManager.currentDominosAvailable() && !(frameManager.getPlayerTookTurn(frameManager.getPlayerNumber(this)))){
     		AIpickTile();
-    		//end turn ;automate with frameManager.nextPlayersTurn();
     	} else {
-    		//AIplaceTile();
-    		//AIpickNextTile();
-    		//end turn ;automate with frameManager.nextPlayersTurn();
+    		AIplaceTile();        // Easy AI does not know how to rotate and just arbitrarily places and picks tiles 
+    		AIpickNextTile();
     	}
     }
     
@@ -1991,7 +1989,61 @@ public class GameBoard extends GameFrame implements ActionListener
     
     public void AIplaceTile() 
     {
-    	
+    	ArrayList<Integer> icords= new ArrayList<>();
+    	ArrayList<Integer> jcords= new ArrayList<>();
+    	for(int i = 0; i < ROWS; ++i){
+            for(int j = 0; j < COLUMNS; ++j){
+            	if (gridSquares[i][j].getBackground() == Color.WHITE){
+                    if (rotatingTileOnRight(i, j)){
+                        if (verifyAdjacentSquare(i,j+1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                            icords.add(i);
+                            jcords.add(j);
+                        	}
+                        }
+                    else if (rotatingTileOnLeft(i, j)){
+                        if (verifyAdjacentSquare(i,j-1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                        	icords.add(i);
+                            jcords.add(j);
+                        	}
+                        }
+                    else if (rotatingTileBelow(i, j)){
+
+                        if (verifyAdjacentSquare(i+1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                        	icords.add(i);
+                            jcords.add(j);
+                        	}
+                       	}
+                    else if (rotatingTileOnTop(i, j))
+                    {
+                        if (verifyAdjacentSquare(i-1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                        	icords.add(i);
+                            jcords.add(j);
+                        }
+                        }
+                    }
+                }
+            }
+    	if(icords.size()==0) {          //If no placement available, discard domino
+    		rotateTile2.setBackground(Color.WHITE);
+            rotateTile2.setIcon(null);
+            rotateTile4.setBackground(Color.WHITE);
+            rotateTile4.setIcon(null);
+            rotateTile5.setBackground(Color.WHITE);
+            rotateTile5.setIcon(null);
+            rotateTile6.setBackground(Color.WHITE);
+            rotateTile6.setIcon(null);
+            rotateTile8.setBackground(Color.WHITE);
+            rotateTile8.setIcon(null);
+            System.out.println("I had to discard the domino :(");   //DEBUG
+            frameManager.removeDomino();
+            frameManager.setRoundStatus("select domino");
+            frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+    	} else { 						//place from list randomly here
+    		int num = rand.nextInt(icords.size());
+        	placeTile(icords.get(num),jcords.get(num));
+        	frameManager.setRoundStatus("select domino");
+            frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+    	}
     }
     
     public void AIpickNextTile()
