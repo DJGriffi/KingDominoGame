@@ -25,6 +25,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class GameBoard extends GameFrame implements ActionListener
 {
@@ -72,27 +73,30 @@ public class GameBoard extends GameFrame implements ActionListener
         /*Create panel to the right of the playing area*/
         rightPanel = new JPanel();
         //rightPanel.setPreferredSize(new Dimension(700,1500));
-        rightPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, screenSize.height));
+        rightPanel.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height));
         rightPanel.setLayout(new BorderLayout());
 
         /****************************************************/
         /* Creating top panel with currentDominos round information*/
         topPanel = new JPanel();
         //topPanel.setPreferredSize(new Dimension(650,60));
-        topPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, 60));
+        topPanel.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 2/20));
         topPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
         JPanel topLeft = new JPanel();
-        topLeft.setPreferredSize(new Dimension(125,20));
-        topLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
+        //topLeft.setPreferredSize(new Dimension(125,20));
+        //topLeft.setPreferredSize(new Dimension(screenSize.width * 3/8 * 2/9, screenSize.height * 1/9));
+        topLeft.setLayout(new BoxLayout(topLeft, BoxLayout.Y_AXIS));
         round = new JLabel("Round #: 0");
+        round.setHorizontalAlignment(SwingConstants.LEFT);
         topLeft.add(round);
+        round.setAlignmentX(Component.LEFT_ALIGNMENT);
         topPanel.add(topLeft);
 
 
         JPanel topCenter = new JPanel();
-        //topCenter.setPreferredSize(new Dimension(screenSize.width * 1/3, 50));
-        topCenter.setPreferredSize(new Dimension(400,50));
+        //topCenter.setPreferredSize(new Dimension(screenSize.width * 3/8 * 5/9, screenSize.height * 1/9));
+        //topCenter.setPreferredSize(new Dimension(400,50));
         whoTurn = new JLabel("Player One's turn");
         doThis = new JLabel("Do this thing this turn");
         topCenter.add(whoTurn);
@@ -100,7 +104,8 @@ public class GameBoard extends GameFrame implements ActionListener
         topPanel.add(topCenter);
 
         JPanel topRight = new JPanel();
-        topRight.setPreferredSize(new Dimension(150,20));
+        //topRight.setPreferredSize(new Dimension(150,20));
+        //topRight.setPreferredSize(new Dimension(screenSize.width * 3/8 * 2/9, screenSize.height * 1/9));
         topRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
         dominosLeft = new JLabel("Dominos remaining: 0");
         topRight.add(dominosLeft);
@@ -111,7 +116,7 @@ public class GameBoard extends GameFrame implements ActionListener
         /*****************************************************************/
         /* Creating bottom panel to hold the 'End Turn' and 'Quit' Buttons*/
         bottomPanel = new JPanel();
-        setPreferredSize(new Dimension(screenSize.width * 1/3, 60));
+        setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
         //bottomPanel.setPreferredSize(new Dimension(650,60));
         bottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
@@ -121,10 +126,10 @@ public class GameBoard extends GameFrame implements ActionListener
         quit.addActionListener(e-> quit());
         bottomPanel.add(quit);
 */
-        Dimension minSize = new Dimension(40, 50);
-        Dimension prefSize = new Dimension(40, 50);
-        Dimension maxSize = new Dimension(40, 50);
-        bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+        //Dimension minSize = new Dimension(40, 50);
+        //Dimension prefSize = new Dimension(40, 50);
+        //Dimension maxSize = new Dimension(40, 50);
+/*      bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
         JButton viewPlayer1 = new JButton("View Player 1");
         viewPlayer1.addActionListener(e -> viewPlayer1() );
@@ -138,18 +143,31 @@ public class GameBoard extends GameFrame implements ActionListener
 
         bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
-        JButton viewPlayer3 = new JButton("View Player 3");
-        viewPlayer3.addActionListener(e -> viewPlayer3() );
-        bottomPanel.add(viewPlayer3);
+        //JButton viewPlayer3 = new JButton("View Player 3");
+        //viewPlayer3.addActionListener(e -> viewPlayer3() );
+        //bottomPanel.add(viewPlayer3);
+
+        //bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+
+        //JButton viewPlayer4 = new JButton("View Player 4");
+        //viewPlayer4.addActionListener(e -> viewPlayer4() );
+        //bottomPanel.add(viewPlayer4);
+*/
+        Dimension minSize = new Dimension(screenSize.width * 1/20, screenSize.height * 1/20);
+        Dimension prefSize = new Dimension(screenSize.width * 1/20, screenSize.height * 1/20);
+        Dimension maxSize = new Dimension(screenSize.width * 1/20, screenSize.height * 1/20);
 
         bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+      
+        discardDomino = new JButton("Discard domino");
+        discardDomino.addActionListener(e -> discardDomino(frameManager.getCurrentDomino()));
+        bottomPanel.add(discardDomino);
 
-        JButton viewPlayer4 = new JButton("View Player 4");
-        viewPlayer4.addActionListener(e -> viewPlayer4() );
-        bottomPanel.add(viewPlayer4);
+        minSize = new Dimension(screenSize.width * 2/10, screenSize.height * 1/20);
+        prefSize = new Dimension(screenSize.width * 2/10, screenSize.height * 1/20);
+        maxSize = new Dimension(screenSize.width * 2/10, screenSize.height * 1/20);
 
         bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
-
 
         endTurn = new JButton("End Turn");
         endTurn.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -164,15 +182,15 @@ public class GameBoard extends GameFrame implements ActionListener
         rightCenterPanel.setLayout(new BorderLayout());
 
         JPanel rightCenterTopPanel = new JPanel();
-        setPreferredSize(new Dimension(screenSize.width * 1/3, 40));
+        setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
         //rightCenterTopPanel.setPreferredSize(new Dimension(650,40));
         rightCenterTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
-        minSize = new Dimension(210, 30);
-        prefSize = new Dimension(210, 30);
-        maxSize = new Dimension(210, 30);
+        //minSize = new Dimension(210, 30);
+        //prefSize = new Dimension(210, 30);
+        //maxSize = new Dimension(210, 30);
 
-        rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+        //rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
         leftRotate = new JButton("Left");
         leftRotate.addActionListener(e-> rotateLeft(frameManager.getCurrentDomino()));
@@ -185,14 +203,14 @@ public class GameBoard extends GameFrame implements ActionListener
         rightRotate.addActionListener(e-> rotateRight(frameManager.getCurrentDomino()));
         rightCenterTopPanel.add(rightRotate);
 
-        minSize = new Dimension(50, 30);
-        prefSize = new Dimension(50, 30);
-        maxSize = new Dimension(50, 30);
-        rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+        //minSize = new Dimension(50, 30);
+        //prefSize = new Dimension(50, 30);
+        //maxSize = new Dimension(50, 30);
+        //rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
-        discardDomino = new JButton("Discard domino");
-        discardDomino.addActionListener(e -> discardDomino(frameManager.getCurrentDomino()));
-        rightCenterTopPanel.add(discardDomino);
+        //discardDomino = new JButton("Discard domino");
+        //discardDomino.addActionListener(e -> discardDomino(frameManager.getCurrentDomino()));
+        //rightCenterTopPanel.add(discardDomino);
 
         rightCenterPanel.add(rightCenterTopPanel, BorderLayout.NORTH);
 
@@ -207,7 +225,8 @@ public class GameBoard extends GameFrame implements ActionListener
         rightCenterCenterTopPanel.setLayout(new BorderLayout());
         
         JPanel rightCenterCenterTopCenterPanel = new JPanel();
-        rightCenterCenterTopCenterPanel.setPreferredSize(new Dimension(550,300));
+        //rightCenterCenterTopCenterPanel.setPreferredSize(new Dimension(550,300));
+        rightCenterCenterTopCenterPanel.setPreferredSize(new Dimension(screenSize.width *1/3 * 1/2, screenSize.height * 5/20));
         rightCenterCenterTopCenterPanel.setLayout(new GridLayout(3,3,2,2));
         JButton rotateTile1 = new JButton();
         rotateTile1.setPreferredSize(new Dimension(50,50));
@@ -283,9 +302,9 @@ public class GameBoard extends GameFrame implements ActionListener
 
         JPanel eastFiller = new JPanel();
         JPanel westFiller = new JPanel();
-        Dimension topCCMinSize = new Dimension(150, 200);
-        Dimension topCCPrefSize = new Dimension(150, 200);
-        Dimension topCCMaxSize = new Dimension(150, 200);
+        Dimension topCCMinSize = new Dimension(screenSize.width * 1/4 * 1/3, screenSize.height * 5/20);
+        Dimension topCCPrefSize = new Dimension(screenSize.width * 1/4 * 1/3, screenSize.height * 5/20);
+        Dimension topCCMaxSize = new Dimension(screenSize.width * 1/4 * 1/3, screenSize.height * 5/20);//150,200
         eastFiller.add(new Box.Filler(topCCMinSize, topCCPrefSize, topCCMaxSize));
         westFiller.add(new Box.Filler(topCCMinSize, topCCPrefSize, topCCMaxSize));
         rightCenterCenterTopPanel.add(eastFiller, BorderLayout.EAST);
@@ -297,7 +316,7 @@ public class GameBoard extends GameFrame implements ActionListener
         /**Create panel to hold the currentDominos round tiles and next round tiles**/
         JPanel rightCenterCenterTopBottomPanel = new JPanel();
         //rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(550,60));
-        rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, 60));
+        rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
         rightCenterCenterTopBottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         JLabel currentRndTiles = new JLabel("Current Round Dominoes");
         rightCenterCenterTopBottomPanel.add(currentRndTiles);
@@ -312,7 +331,7 @@ public class GameBoard extends GameFrame implements ActionListener
         rightCenterCenterPanel.add(rightCenterCenterTopPanel, BorderLayout.NORTH);
 
         JPanel rightCenterCenterLeftPanel = new JPanel();
-        rightCenterCenterLeftPanel.setPreferredSize(new Dimension(30,600));
+        rightCenterCenterLeftPanel.setPreferredSize(new Dimension(30,screenSize.height * 11/20));
 
         Dimension playerIconMinSize = new Dimension(5, 15);//20
         Dimension playerIconPrefSize = new Dimension(5, 15);
@@ -331,7 +350,7 @@ public class GameBoard extends GameFrame implements ActionListener
         rightCenterCenterPanel.add(rightCenterCenterLeftPanel, BorderLayout.WEST);
 
         JPanel rightCenterCenterRightPanel = new JPanel();
-        rightCenterCenterRightPanel.setPreferredSize(new Dimension(30,600));
+        rightCenterCenterRightPanel.setPreferredSize(new Dimension(30,screenSize.height * 11/20));
 
         rightCenterCenterRightPanel.add(new Box.Filler(playerIconMinSize1, playerIconPrefSize1, playerIconMaxSize1));
 
@@ -343,7 +362,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
         JPanel rightCenterCenterCenterPanel = new JPanel();
         rightCenterCenterCenterPanel.setLayout(new GridLayout(4,5,2,2));
-        rightCenterCenterCenterPanel.setPreferredSize(new Dimension(screenSize.width * 1/3, 600));
+        rightCenterCenterCenterPanel.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 11/20));
         //rightCenterCenterCenterPanel.setPreferredSize(new Dimension(500, 600));
 
         currentTile11 = new JButton();
@@ -496,7 +515,7 @@ public class GameBoard extends GameFrame implements ActionListener
         centerPanel = new JPanel();
         //centerPanel.setBounds(100, 100, 1300, 1500);
         //centerPanel.setPreferredSize(new Dimension(1300, 1500));
-        centerPanel.setPreferredSize(new Dimension(screenSize.width * 2/3, screenSize.height));
+        centerPanel.setPreferredSize(new Dimension(screenSize.width * 5/8, screenSize.height));
         centerPanel.setLayout(new GridLayout(ROWS,COLUMNS,2,2));
         addGridSquares();
         getContentPane().add(centerPanel, BorderLayout.WEST);
@@ -528,6 +547,25 @@ public class GameBoard extends GameFrame implements ActionListener
         JMenuItem quitItem = new JMenuItem("Quit");
         quitItem.addActionListener(e->quit());
         fileMenu.add(quitItem);
+
+        JMenu viewMenu = new JMenu("View");
+        menuBar.add(viewMenu);
+
+        JMenuItem viewPlayer1 = new JMenuItem("View Player 1");
+        viewPlayer1.addActionListener(e -> viewPlayer1());
+        viewMenu.add(viewPlayer1);
+
+        JMenuItem viewPlayer2 = new JMenuItem("View Player 2");
+        viewPlayer2.addActionListener(e -> viewPlayer2());
+        viewMenu.add(viewPlayer2);
+
+        JMenuItem viewPlayer3 = new JMenuItem("View Player 3");
+        viewPlayer3.addActionListener(e -> viewPlayer3());
+        viewMenu.add(viewPlayer3);
+
+        JMenuItem viewPlayer4 = new JMenuItem("View Player 4");
+        viewPlayer4.addActionListener(e -> viewPlayer4());
+        viewMenu.add(viewPlayer4);
     }
     
     public void actionPerformed(ActionEvent e)
