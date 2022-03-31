@@ -536,7 +536,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
         //setPlayerNum();
         Image startingTile = ImageIO.read(getClass().getResource("/images/StartingTile.png"));
-        startingTile = startingTile.getScaledInstance(185, 110, java.awt.Image.SCALE_SMOOTH);
+        startingTile = startingTile.getScaledInstance(screenSize.width * 5/8 * 1/9, screenSize.height * 1/9, java.awt.Image.SCALE_SMOOTH); //185, 110
         gridSquares[4][4].setIcon(new ImageIcon(startingTile));
         gridSquares[4][4].setBackground(Color.BLACK);
 

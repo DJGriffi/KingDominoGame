@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.Dimension;
 
 public class Domino 
 {
@@ -9,7 +11,7 @@ public class Domino
     private Player pickedBy;
     private boolean available, played;
     private Image tile1Image, tile2Image;
-
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public Domino(Color tile1Color, Color tile2Color, int numOfCrownsTile1, int numOfCrownsTile2, int numericalVal, Image tile1Image, Image tile2Image)
     {
@@ -20,8 +22,8 @@ public class Domino
         this.numericalVal = numericalVal;
         this.tile1Image = tile1Image;
         this.tile2Image = tile2Image;
-        this.tile1Image = tile1Image.getScaledInstance(190, 105, java.awt.Image.SCALE_SMOOTH);
-        this.tile2Image = tile2Image.getScaledInstance(190, 105, java.awt.Image.SCALE_SMOOTH);//143,110
+        this.tile1Image = tile1Image.getScaledInstance(screenSize.width * 5/8 * 1/9, screenSize.height * 1/9, java.awt.Image.SCALE_SMOOTH);//second attempt 190,105
+        this.tile2Image = tile2Image.getScaledInstance(screenSize.width * 5/8 * 1/9, screenSize.height * 1/9, java.awt.Image.SCALE_SMOOTH);//143,110
         available = true;
         played = false;
         tile1x = 0;
