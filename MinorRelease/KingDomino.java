@@ -257,7 +257,12 @@ public class KingDomino
 	{
 		players.add(new Player(playerName, playerColor, playerNumber));
 	}
-
+	
+	public void createAIplayer(String playerName, Color playerColor, int playerNumber, int difficulty)
+	{
+		players.add(new Player(playerName, playerColor, playerNumber, difficulty));
+	}
+	
 	public String getRoundStatus()
 	{
 		return roundStatus;
@@ -334,5 +339,10 @@ public class KingDomino
 	{
 		int playa = player - 1;
 		return players.get(playa).getTookTurn();
+	}
+	
+	public int getCurrentPlayer() 
+	{
+		return currentPlayersTurn;
 	}
 }
