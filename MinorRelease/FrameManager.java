@@ -612,4 +612,18 @@ public class FrameManager implements java.io.Serializable
     {
         kingDomino.loadGame();
     }
+
+    public void reset() throws IOException
+    {
+        player1GameBoard = null;
+        player2GameBoard = null;
+        player3GameBoard = null;
+        player4GameBoard = null;
+        gameModeFrame = null;
+        mainFrame = null;
+        colourSettingsFrame = null;
+        settingsFrame = null;
+        playerSettingsFrame = null;
+        kingDomino.reset();
+    }
 }

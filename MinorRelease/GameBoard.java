@@ -511,7 +511,13 @@ public class GameBoard extends GameFrame implements ActionListener
         fileMenu.add(saveItem);
 
         JMenuItem quitItem = new JMenuItem("Quit");
-        quitItem.addActionListener(e->quit());
+        quitItem.addActionListener(e->{
+            try {
+                quit();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
         fileMenu.add(quitItem);
 
         JMenu viewMenu = new JMenu("View");
@@ -1481,12 +1487,12 @@ public class GameBoard extends GameFrame implements ActionListener
         }
     }
 
-    private void quit()
+    private void quit() throws IOException
     {
         int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit the current game?", "Confirmation Required", JOptionPane.YES_NO_OPTION); 
             if(answer == 0){
                 setVisible(false);
-                frameManager.showMainFrame();
+                frameManager.reset();
             }
     }
 

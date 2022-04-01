@@ -375,4 +375,21 @@ public class KingDomino implements java.io.Serializable
 	{
 		Driver.loadGame();
 	}
+
+	public void reset() throws IOException
+	{
+		rand = new Random();
+		currentRndDominos = new ArrayList<>();
+		nextRndDominos = new ArrayList<>();
+		dealer = new DeckOfDominos();
+		dealer.createDeck();
+		players = new ArrayList<>();
+		frameManager = new FrameManager(this);
+        frameManager.showMainFrame();
+		roundNum = 1;
+		numOfPlayers = 2;
+		lastRoundTracker = 0;
+		roundStatus = "starting round";
+
+	}
 }

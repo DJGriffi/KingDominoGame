@@ -62,6 +62,7 @@ public class MainFrame extends GameFrame
 		getContentPane().add(b3, gbc);
 		
 		b4 = new JButton("Quit");
+		b4.addActionListener(e -> quit());
 		b4.setHorizontalTextPosition(SwingConstants.CENTER);
 		gbc.gridx = 0;
 		gbc.gridy = 10;
@@ -97,6 +98,11 @@ public class MainFrame extends GameFrame
 	private void loadGame()
 	{
 		frameManager.loadGame();
+	}
+
+	private void quit()
+	{
+		System.exit(0);
 	}
 
 }
