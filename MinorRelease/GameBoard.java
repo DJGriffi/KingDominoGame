@@ -1956,7 +1956,7 @@ public class GameBoard extends GameFrame implements ActionListener
             rotateTile6.setIcon(null);
             rotateTile8.setBackground(Color.WHITE);
             rotateTile8.setIcon(null);
-            System.out.println("I had to discard the domino :(");   //DEBUG
+            //System.out.println("I had to discard the domino :(");   //DEBUG
             frameManager.removeDomino();
             frameManager.setRoundStatus("select domino");
             frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
@@ -2097,7 +2097,7 @@ public class GameBoard extends GameFrame implements ActionListener
             rotateTile6.setIcon(null);
             rotateTile8.setBackground(Color.WHITE);
             rotateTile8.setIcon(null);
-            System.out.println("I had to discard the domino :(");   //DEBUG
+            //System.out.println("I had to discard the domino :(");   //DEBUG
             frameManager.removeDomino();
             frameManager.setRoundStatus("select domino");
             frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
