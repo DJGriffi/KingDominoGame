@@ -38,7 +38,7 @@ public class GameFrame extends JFrame implements java.io.Serializable
         });
 		getContentPane().setLayout(new GridBagLayout());
         setColours();
-        setResizable(true);
+        setResizable(false);
 
     }
 
