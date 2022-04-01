@@ -39,7 +39,7 @@ public class GameFrame extends JFrame
         });
 		getContentPane().setLayout(new GridBagLayout());
         setColours();
-        setResizable(false);
+        setResizable(true);
 
     }
 
