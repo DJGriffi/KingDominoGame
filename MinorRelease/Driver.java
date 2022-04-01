@@ -21,8 +21,6 @@ public class Driver implements java.io.Serializable
             out.flush();
             out.close();
             file.close();
-              
-            System.out.println("Object has been serialized");
   
         }
           
@@ -46,8 +44,6 @@ public class Driver implements java.io.Serializable
             
             in.close();
             file.close();
-            
-            System.out.println("Object has been deserialized ");
         }
           
         catch(IOException ex)
