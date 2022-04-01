@@ -2055,9 +2055,14 @@ public class GameBoard extends GameFrame implements ActionListener
             frameManager.removeDomino();
             frameManager.setRoundStatus("select domino");
             frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+            if(((frameManager.getNumOfPlayers() == 2) && (frameManager.getRoundNum() == 6)) || ((frameManager.getNumOfPlayers() == 4) && (frameManager.getRoundNum() == 12)))
+            {
+                frameManager.updateLastRoundTracker();
+            }
     	} else { 						//place from list randomly here
     		int num = rand.nextInt(icords.size());
         	placeTile(icords.get(num),jcords.get(num));
+            frameManager.getListOfPlayers().get(playerNum-1).setPoints(calculateScore());
         	frameManager.setRoundStatus("select domino");
             frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
     	}
