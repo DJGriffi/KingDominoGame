@@ -1,7 +1,7 @@
-import java.util.ArrayList;
 import java.awt.Color;
 import java.io.IOException;
-import java.io.*;
+import java.util.ArrayList;
+
 import javax.swing.UIManager;
 
 public class FrameManager implements java.io.Serializable
@@ -487,6 +487,7 @@ public class FrameManager implements java.io.Serializable
     public void enableNextRndDominoes(int player, int i)
     {
         if (player == 1){
+
             if(i == 0){
                 player1GameBoard.enableNextRndDominoes1();
             }
@@ -502,7 +503,7 @@ public class FrameManager implements java.io.Serializable
             player1GameBoard.setDoThis("Select domino from 'next round' pile");
         }
         else if(player == 2){
-            //player2GameBoard.enableNextRndDominoes();
+
             if(i == 0){
                 player2GameBoard.enableNextRndDominoes1();
             }
@@ -519,7 +520,7 @@ public class FrameManager implements java.io.Serializable
             player2GameBoard.setDoThis("Select domino from 'next round' pile");
         }
         else if(player == 3){
-            //player3GameBoard.enableNextRndDominoes();
+    
             if(i == 0){
                 player3GameBoard.enableNextRndDominoes1();
             }
@@ -535,7 +536,7 @@ public class FrameManager implements java.io.Serializable
             player3GameBoard.setDoThis("Select domino from 'next round' pile");
         }
         else if(player == 4){
-            //player4GameBoard.enableNextRndDominoes();
+  
             if(i == 0){
                 player4GameBoard.enableNextRndDominoes1();
             }

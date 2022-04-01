@@ -1,8 +1,7 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Graphics;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
@@ -12,8 +11,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-
-import java.io.*;
 
 
 public class GameFrame extends JFrame implements java.io.Serializable

@@ -1,7 +1,8 @@
-import java.awt.*;    
-import java.util.*;    
-import javax.swing.*;
-import java.io.*;
+import java.awt.Button;
+import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
   
     
 public class ResultsFrame extends JFrame

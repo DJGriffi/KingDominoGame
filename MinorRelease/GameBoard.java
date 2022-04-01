@@ -1,23 +1,22 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
-import java.util.*;
-import java.awt.Point;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,7 +26,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 public class GameBoard extends GameFrame implements ActionListener
 {
@@ -118,21 +116,18 @@ public class GameBoard extends GameFrame implements ActionListener
         topNorth.add(new Box.Filler(minSize, prefSize, maxSize));
 
         JPanel topRight = new JPanel();
-        //topRight.setPreferredSize(new Dimension(150,20));
-        //topRight.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
-        //topRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
+ 
         dominosLeft = new JLabel("Dominos remaining: 0");
         topRight.add(dominosLeft);
         topNorth.add(topRight);
 
         topPanel.add(topNorth, BorderLayout.NORTH);
 
-        //topPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+ 
 
         JPanel topCenter = new JPanel();
         topCenter.setLayout(new FlowLayout());
         topCenter.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
-        //topCenter.setPreferredSize(new Dimension(400,50));
         whoTurn = new JLabel("Player One's turn");
         doThis = new JLabel("Do this thing this turn");
         topCenter.add(whoTurn);
@@ -146,52 +141,13 @@ public class GameBoard extends GameFrame implements ActionListener
         /* Creating bottom panel to hold the 'End Turn' and 'Quit' Buttons*/
         bottomPanel = new JPanel();
         setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
-        //bottomPanel.setPreferredSize(new Dimension(650,60));
+
         bottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
-        //bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
-/*
-        JButton quit = new JButton("Quit");
-        quit.setAlignmentX(Component.LEFT_ALIGNMENT);
-        quit.addActionListener(e-> quit());
-        bottomPanel.add(quit);
-*/
-        //Dimension minSize = new Dimension(40, 50);
-        //Dimension prefSize = new Dimension(40, 50);
-        //Dimension maxSize = new Dimension(40, 50);
-/*      bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
-        JButton viewPlayer1 = new JButton("View Player 1");
-        viewPlayer1.addActionListener(e -> viewPlayer1() );
-        bottomPanel.add(viewPlayer1);
-
-        bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
-
-        JButton viewPlayer2 = new JButton("View Player 2");
-        viewPlayer2.addActionListener(e -> viewPlayer2() );
-        bottomPanel.add(viewPlayer2);
-
-        bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
-
-        //JButton viewPlayer3 = new JButton("View Player 3");
-        //viewPlayer3.addActionListener(e -> viewPlayer3() );
-        //bottomPanel.add(viewPlayer3);
-
-        //bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
-
-        //JButton viewPlayer4 = new JButton("View Player 4");
-        //viewPlayer4.addActionListener(e -> viewPlayer4() );
-        //bottomPanel.add(viewPlayer4);
-*/
-        //Dimension minSize = new Dimension(screenSize.width * 1/20, screenSize.height * 1/20);
-        //Dimension prefSize = new Dimension(screenSize.width * 1/20, screenSize.height * 1/20);
-        //Dimension maxSize = new Dimension(screenSize.width * 1/20, screenSize.height * 1/20);
-
-        //bottomPanel.add(new Box.Filler(minSize, prefSize, maxSize));
-      
         discardDomino = new JButton("Discard domino");
         discardDomino.addActionListener(e -> discardDomino(frameManager.getCurrentDomino()));
         bottomPanel.add(discardDomino);
-        //bottomPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
 
         minSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
         prefSize = new Dimension(screenSize.width * 3/8 * 2/5, screenSize.height * 1/20);
@@ -213,14 +169,9 @@ public class GameBoard extends GameFrame implements ActionListener
 
         JPanel rightCenterTopPanel = new JPanel();
         setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
-        //rightCenterTopPanel.setPreferredSize(new Dimension(650,40));
         rightCenterTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
-        //minSize = new Dimension(210, 30);
-        //prefSize = new Dimension(210, 30);
-        //maxSize = new Dimension(210, 30);
 
-        //rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 
         leftRotate = new JButton("Left");
         leftRotate.addActionListener(e-> rotateLeft(frameManager.getCurrentDomino()));
@@ -232,15 +183,6 @@ public class GameBoard extends GameFrame implements ActionListener
         rightRotate = new JButton("Right");
         rightRotate.addActionListener(e-> rotateRight(frameManager.getCurrentDomino()));
         rightCenterTopPanel.add(rightRotate);
-
-        //minSize = new Dimension(50, 30);
-        //prefSize = new Dimension(50, 30);
-        //maxSize = new Dimension(50, 30);
-        //rightCenterTopPanel.add(new Box.Filler(minSize, prefSize, maxSize));
-
-        //discardDomino = new JButton("Discard domino");
-        //discardDomino.addActionListener(e -> discardDomino(frameManager.getCurrentDomino()));
-        //rightCenterTopPanel.add(discardDomino);
 
         rightCenterPanel.add(rightCenterTopPanel, BorderLayout.NORTH);
 
@@ -255,7 +197,6 @@ public class GameBoard extends GameFrame implements ActionListener
         rightCenterCenterTopPanel.setLayout(new BorderLayout());
         
         JPanel rightCenterCenterTopCenterPanel = new JPanel();
-        //rightCenterCenterTopCenterPanel.setPreferredSize(new Dimension(550,300));
         rightCenterCenterTopCenterPanel.setPreferredSize(new Dimension(screenSize.width *1/3 * 1/2, screenSize.height * 5/20));
         rightCenterCenterTopCenterPanel.setLayout(new GridLayout(3,3,2,2));
         JButton rotateTile1 = new JButton();
@@ -345,7 +286,6 @@ public class GameBoard extends GameFrame implements ActionListener
         /*********************************************************************/
         /**Create panel to hold the currentDominos round tiles and next round tiles**/
         JPanel rightCenterCenterTopBottomPanel = new JPanel();
-        //rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(550,60));
         rightCenterCenterTopBottomPanel.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 1/20));
         rightCenterCenterTopBottomPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         JLabel currentRndTiles = new JLabel("Current Round Dominoes");
@@ -393,7 +333,6 @@ public class GameBoard extends GameFrame implements ActionListener
         JPanel rightCenterCenterCenterPanel = new JPanel();
         rightCenterCenterCenterPanel.setLayout(new GridLayout(4,5,2,2));
         rightCenterCenterCenterPanel.setPreferredSize(new Dimension(screenSize.width * 3/8, screenSize.height * 11/20));
-        //rightCenterCenterCenterPanel.setPreferredSize(new Dimension(500, 600));
 
         currentTile11 = new JButton();
         currentTile11.setPreferredSize(new Dimension(50,50));
@@ -543,14 +482,11 @@ public class GameBoard extends GameFrame implements ActionListener
         getContentPane().add(rightPanel, BorderLayout.EAST);
 
         centerPanel = new JPanel();
-        //centerPanel.setBounds(100, 100, 1300, 1500);
-        //centerPanel.setPreferredSize(new Dimension(1300, 1500));
         centerPanel.setPreferredSize(new Dimension(screenSize.width * 5/8, screenSize.height));
         centerPanel.setLayout(new GridLayout(ROWS,COLUMNS,2,2));
         addGridSquares();
         getContentPane().add(centerPanel, BorderLayout.WEST);
 
-        //setPlayerNum();
         Image startingTile = ImageIO.read(getClass().getResource("/images/StartingTile.png"));
         startingTile = startingTile.getScaledInstance(screenSize.width * 5/8 * 1/9, screenSize.height * 1/9, java.awt.Image.SCALE_SMOOTH); //185, 110
         gridSquares[4][4].setIcon(new ImageIcon(startingTile));
@@ -609,8 +545,6 @@ public class GameBoard extends GameFrame implements ActionListener
                 frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
                 frameManager.setCurrentDomino1Invisible();
                 setDoThis("Press 'End Turn' to end your turn.");
-                //endTurn();
-                //frameManager.nextPlayersTurn();
                 frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                 enableEndTurn();
 		    }
@@ -620,8 +554,6 @@ public class GameBoard extends GameFrame implements ActionListener
                 frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
                 frameManager.setCurrentDomino2Invisible(); 
                 setDoThis("Press 'End Turn' to end your turn.");
-                //endTurn();
-                //frameManager.nextPlayersTurn();
                 frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                 enableEndTurn();
 		    }
@@ -631,8 +563,6 @@ public class GameBoard extends GameFrame implements ActionListener
                 frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
                 frameManager.setCurrentDomino3Invisible();
                 setDoThis("Press 'End Turn' to end your turn.");
-                //endTurn();
-                //frameManager.nextPlayersTurn();
                 frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                 enableEndTurn();
 		    }
@@ -642,8 +572,6 @@ public class GameBoard extends GameFrame implements ActionListener
                 frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
                 frameManager.setCurrentDomino4Invisible();
                 setDoThis("Press 'End Turn' to end your turn.");
-                //endTurn();
-                //frameManager.nextPlayersTurn();
                 frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                 enableEndTurn();
 		    }
@@ -675,17 +603,8 @@ public class GameBoard extends GameFrame implements ActionListener
                 frameManager.showResultsFrame();
             }
         }         
-/*
-		else if (e.getSource() == leftRotate)
-		{
-			rotateLeft(frameManager.getCurrentDomino());
-		}
 
-		else if (e.getSource() == rightRotate)
-		{   
-			rotateRight(frameManager.getCurrentDomino());
-		}
-*/		else if (frameManager.getRoundStatus().equals("select domino") && !(frameManager.getPlayerTookTurn(frameManager.getPlayerNumber(this)))){
+		else if (frameManager.getRoundStatus().equals("select domino") && !(frameManager.getPlayerTookTurn(frameManager.getPlayerNumber(this)))){
 
 		    if ((e.getSource() == nextRndTile11) || (e.getSource() == nextRndTile12)){
 
@@ -698,10 +617,7 @@ public class GameBoard extends GameFrame implements ActionListener
             	    frameManager.setNextDomino1Invisible();
                     frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                     setDoThis("Press 'End Turn' to end your turn.");
-                    //frameManager.setRoundStatus("");
                     enableEndTurn();
-                    //endTurn();
-                    //frameManager.nextPlayersTurn();
                 }
 		    }
 		
@@ -715,10 +631,7 @@ public class GameBoard extends GameFrame implements ActionListener
             	    frameManager.setNextDomino2Invisible();
                     frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                     setDoThis("Press 'End Turn' to end your turn.");
-                    //frameManager.setRoundStatus("");
                     enableEndTurn();
-                    //endTurn();
-                    //frameManager.nextPlayersTurn();
                 }
 		    }
 		
@@ -733,10 +646,7 @@ public class GameBoard extends GameFrame implements ActionListener
             	    frameManager.setNextDomino3Invisible();
                     frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                     setDoThis("Press 'End Turn' to end your turn.");
-                    //frameManager.setRoundStatus("");
                     enableEndTurn();
-                    //endTurn();
-                    //frameManager.nextPlayersTurn();
                 }
 		    }   
 		
@@ -751,10 +661,7 @@ public class GameBoard extends GameFrame implements ActionListener
             	    frameManager.setNextDomino4Invisible();
                     frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                     setDoThis("Press 'End Turn' to end your turn.");
-                    //frameManager.setRoundStatus("");
                     enableEndTurn();
-                    //endTurn();
-                    //frameManager.nextPlayersTurn();
                 }
 		    }
         }
@@ -769,10 +676,6 @@ public class GameBoard extends GameFrame implements ActionListener
                 frameManager.nextPlayersTurn();
             }
         }
-        //else if (e.getSource() == endTurn){
-        //    disableEndTurn();
-        //    frameManager.nextPlayersTurn();
-        //}
 
         else if (frameManager.getRoundStatus().equals("place domino")){
 
@@ -1565,11 +1468,6 @@ public class GameBoard extends GameFrame implements ActionListener
         }
 
     }
-
-    //private void setPlayerNum()
-    //{
-    //    whoTurn.setText("Player " + playerNum + "'s turn");
-    //}
 
     private void addGridSquares()
     {

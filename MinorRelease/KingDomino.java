@@ -1,9 +1,8 @@
+import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.awt.Color;
-import java.io.IOException;
-import java.io.*;
 
 public class KingDomino implements java.io.Serializable
 {
@@ -82,7 +81,6 @@ public class KingDomino implements java.io.Serializable
 
 			else if(playedDominoes() && frameManager.getRemainingDominos() > 0){
 				hideCurrentPlayerBoard();
-				//roundStatus = "";
 				++roundNum;
 				Collections.copy(currentRndDominos, nextRndDominos);
 				nextRndDominos = dealer.randomDominos();
@@ -99,24 +97,7 @@ public class KingDomino implements java.io.Serializable
 				frameManager.disableNextRndDominoes(currentDomino);
 				showCurrentPlayerBoard();
 			}
-/*
-			else if (roundStatus.equals("place domino") && !currentDominosAvailable() && !playedDominoes()){
-				hideCurrentPlayerBoard();
-				frameManager.setCurrentDominoesVisible();
-				for (Domino domino : currentRndDominos){
-					if(!domino.getPlayed()){
-						currentPlayersTurn = (domino.getPickedBy().getPlayerNumber()) - 1;
-						domino.setPlayed(true);
-						currentDomino = domino;
-						break;
-					}
-				}
-				frameManager.showRotate(currentDomino);
-				frameManager.setDoThis("Rotate and place the domino");
-				frameManager.disableNextRndDominoes(currentDomino);
-				showCurrentPlayerBoard();
-			}
-*/
+
 			else if(frameManager.getRemainingDominos() == 0 && playedDominoes() && nextRndDominos.size() > 0){
 				hideCurrentPlayerBoard();
 				++roundNum;
@@ -162,18 +143,14 @@ public class KingDomino implements java.io.Serializable
 						frameManager.enableNextRndDominoes(player, i);
 					}
 				}
-				//frameManager.enableNextRndDominoes(player);
-				//nextPlayersTurn();
 			}
 			else if (getRemainingDominos() == 0 && nextRndDominos.size() > 0){
-				//frameManager.enableNextRndDominoes(player);
 				int i;
 				for(i = 0; i < DOMINOES_PER_ROUND; i++){
 					if(nextRndDominos.get(i).getAvailable() == true){
 						frameManager.enableNextRndDominoes(player, i);
 					}
 				}
-				//nextPlayersTurn();
 			}
 			else{
 				setRoundStatus("");

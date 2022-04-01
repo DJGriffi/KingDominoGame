@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.util.ArrayList;
-import java.io.*;
 
 public class Player implements java.io.Serializable
 {
@@ -102,8 +101,6 @@ public class Player implements java.io.Serializable
 
 	public void removeDomino(Domino dominoToRemove)
 	{
-		//System.out.println(dominoes.size());
 		dominoes.removeIf(domino -> domino == dominoToRemove);
-		//System.out.println(dominoes.size());
 	}
 }
