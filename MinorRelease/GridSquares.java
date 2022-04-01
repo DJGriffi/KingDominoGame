@@ -1,9 +1,9 @@
 import java.awt.Color;
 import java.awt.Dimension;
-
+import java.io.*;
 import javax.swing.JButton;
 
-public class GridSquares extends JButton
+public class GridSquares extends JButton implements java.io.Serializable
 {
     
     private int xcoord, ycoord, crowns;

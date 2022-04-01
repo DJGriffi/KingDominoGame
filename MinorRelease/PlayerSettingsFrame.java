@@ -29,7 +29,7 @@ enum Hue {
 		}
 }
 
-public class PlayerSettingsFrame extends GameFrame
+public class PlayerSettingsFrame extends GameFrame implements java.io.Serializable
 {
 	private FrameManager frameManager;
 	private int AIplayers;

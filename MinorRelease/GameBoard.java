@@ -51,7 +51,7 @@ public class GameBoard extends GameFrame implements ActionListener
     private ArrayList<Domino> currentDominos;
     private ArrayList<Domino> nextDominos; 
     private boolean AIboard;
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private transient Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static int dRow[] = { -1, 0, 1, 0 };
     static int dCol[] = { 0, 1, 0, -1 };
 
@@ -1594,7 +1594,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
     private void save()
     {
-        /* PLACE SAVE FUNCTION HERE */
+        frameManager.saveGame();
     }
 
     private void rotateLeft(Domino domino)

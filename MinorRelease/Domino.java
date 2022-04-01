@@ -2,16 +2,17 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Dimension;
+import java.io.*;
 
-public class Domino 
+public class Domino implements java.io.Serializable
 {
     private Color tile1Color, tile2Color;
     private int numOfCrownsTile1, numOfCrownsTile2, numericalVal;
     private int tile1x, tile1y, tile2x, tile2y;
     private Player pickedBy;
     private boolean available, played;
-    private Image tile1Image, tile2Image;
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private transient Image tile1Image, tile2Image;
+    private transient Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public Domino(Color tile1Color, Color tile2Color, int numOfCrownsTile1, int numOfCrownsTile2, int numericalVal, Image tile1Image, Image tile2Image)
     {

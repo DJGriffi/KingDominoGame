@@ -3,8 +3,9 @@ import java.util.Collections;
 import java.util.Random;
 import java.awt.Color;
 import java.io.IOException;
+import java.io.*;
 
-public class KingDomino 
+public class KingDomino implements java.io.Serializable
 {
 	private final int DOMINOES_PER_ROUND =4;
 
@@ -387,5 +388,15 @@ public class KingDomino
 	{
 		Player player = currentDomino.getPickedBy();
 		player.removeDomino(currentDomino);
+	}
+
+	public void saveGame()
+	{
+		Driver.saveGame();
+	}
+
+	public void loadGame()
+	{
+		Driver.loadGame();
 	}
 }

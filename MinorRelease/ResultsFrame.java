@@ -1,6 +1,7 @@
 import java.awt.*;    
 import java.util.*;    
-import javax.swing.*;  
+import javax.swing.*;
+import java.io.*;
   
     
 public class ResultsFrame extends JFrame

@@ -1,11 +1,8 @@
-import java.io.IOException;
 import java.io.*;
 
-public class Driver implements java.io.Serializable
-{   
-    static KingDomino kingDomino;
-
-    public static void saveGame()
+public class SaveGame implements java.io.Serializable
+{
+    public static void saveGame(KingDomino kingDomino)
     {
         try
         {   
@@ -15,7 +12,7 @@ public class Driver implements java.io.Serializable
               
             // Method for serialization of object
             out.writeObject(kingDomino);
-            out.flush();
+              
             out.close();
             file.close();
               
@@ -30,20 +27,20 @@ public class Driver implements java.io.Serializable
     }
 
     public static void loadGame()
-    {   
-        kingDomino = null;
+    {
         try
         {   
             // Reading the object from a file
+            KingDomino loadedGame = new KingDomino();
             FileInputStream file = new FileInputStream("savedGame.ser");
             ObjectInputStream in = new ObjectInputStream(file);
               
             // Method for deserialization of object
-            kingDomino = (KingDomino)in.readObject();
-            
+            loadedGame = (KingDomino)in.readObject();
+              
             in.close();
             file.close();
-            
+              
             System.out.println("Object has been deserialized ");
         }
           
@@ -57,10 +54,4 @@ public class Driver implements java.io.Serializable
             ex.printStackTrace();
         }
     }
-
-    public static void main(String[] args) throws IOException 
-    {
-        kingDomino = new KingDomino();
-    }
-
 }

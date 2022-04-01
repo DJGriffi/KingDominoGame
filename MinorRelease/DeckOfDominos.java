@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
-
+import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-public class DeckOfDominos
+public class DeckOfDominos implements java.io.Serializable
 {
 
     private ArrayList<Domino> deck;

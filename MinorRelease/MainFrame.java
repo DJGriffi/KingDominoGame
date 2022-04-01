@@ -50,6 +50,7 @@ public class MainFrame extends GameFrame
 		gbc.gridx = 4;
 		gbc.gridy = 4;
 		gbc.gridwidth = 2;
+		b2.addActionListener(e->loadGame());
 		getContentPane().add(b2, gbc);
 		
 		b3 = new JButton("Settings");
@@ -91,6 +92,11 @@ public class MainFrame extends GameFrame
 	{
 		setVisible(false);
 		frameManager.showSettingsFrame();
+	}
+
+	private void loadGame()
+	{
+		frameManager.loadGame();
 	}
 
 }

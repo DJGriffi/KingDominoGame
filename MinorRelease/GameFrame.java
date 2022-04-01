@@ -13,13 +13,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import java.io.*;
 
-public class GameFrame extends JFrame
+
+public class GameFrame extends JFrame implements java.io.Serializable
 {
     private Color backgroundColour;
     private Color buttonColour;
     private Color textColour;
-    private Image splash;
+    private transient Image splash;
 
 
     public GameFrame() throws IOException

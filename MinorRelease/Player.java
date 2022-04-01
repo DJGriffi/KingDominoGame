@@ -1,7 +1,8 @@
 import java.awt.Color;
 import java.util.ArrayList;
+import java.io.*;
 
-public class Player 
+public class Player implements java.io.Serializable
 {
 	private String name;
 	private int points, playerNumber;

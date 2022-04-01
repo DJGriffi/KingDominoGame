@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.awt.Color;
 import java.io.IOException;
-
+import java.io.*;
 import javax.swing.UIManager;
 
-public class FrameManager
+public class FrameManager implements java.io.Serializable
 {
     private KingDomino kingDomino;
     private GameBoard player1GameBoard;
@@ -606,5 +606,15 @@ public class FrameManager
     public void removeDomino()
     {
         kingDomino.removeDomino();
+    }
+
+    public void saveGame()
+    {
+        kingDomino.saveGame();
+    }
+
+    public void loadGame()
+    {
+        kingDomino.loadGame();
     }
 }
