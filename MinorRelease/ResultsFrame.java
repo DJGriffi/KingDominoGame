@@ -1,4 +1,5 @@
 import java.awt.Button;
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -24,10 +25,12 @@ public class ResultsFrame extends JFrame
         players = frameManager.getListOfPlayers();
         for (int i = 0;i<frameManager.getNumOfPlayers();i++) 
         {
-            buttons[i] = new Button ("" + players.get(i).getName() + " score : " + players.get(i).getPoints());   
+            buttons[i] = new Button ("" + players.get(i).getName() + " score : " + players.get(i).getPoints());
+            buttons[i].setBackground(Color.LIGHT_GRAY);   
             add (buttons[i]);    
         }
         buttons[4] = new Button (frameManager.highestScoringPlayer().getName() + " Wins!");
+        buttons[4].setBackground(Color.LIGHT_GRAY);
         add(buttons[4]);
         setLayout (new BoxLayout (getContentPane(), BoxLayout.Y_AXIS));    
         setSize(400,400);    
