@@ -78,10 +78,15 @@ public class PlayerSettingsFrame extends GameFrame
 		AIinfoPanel.setOpaque(false);
 		JLabel AIinfo =new JLabel("");
 		JButton easyAI=new JButton("Easy");
-		easyAI.addActionListener(e->difficulty=0);
+		easyAI.addActionListener(e->{
+			difficulty=0;
+			JOptionPane.showMessageDialog(null, "AI difficulty set to Easy.", null, JOptionPane.PLAIN_MESSAGE);
+		});
 		JButton hardAI=new JButton("Hard");
-		easyAI.addActionListener(e->difficulty=1);
-		
+		hardAI.addActionListener(e->{
+			difficulty=1;
+			JOptionPane.showMessageDialog(null, "AI difficulty set to Hard.", null, JOptionPane.PLAIN_MESSAGE);
+		});
 		JPanel playerInfoPanel=new JPanel();
 		playerInfoPanel.setOpaque(false);
 		JLabel playerInfoLabel=new JLabel("");
@@ -275,7 +280,7 @@ public class PlayerSettingsFrame extends GameFrame
 		humanPlayers=0;
 		difficulty=0;
 		setVisible(false);
-		frameManager.showGameModeFrame();
+		frameManager.showMainFrame();
 		
 	}
 	

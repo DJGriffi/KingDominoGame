@@ -1999,6 +1999,7 @@ public class GameBoard extends GameFrame implements ActionListener
                 if(num == 3)frameManager.setCurrentDomino4Invisible();
                 frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                 picked = true;
+                setDoThis("The computer has picked tile #" + (num+1) + ", please end turn to continue");
                 enableEndTurn();// TEMPORARY 
     		}
     	}
@@ -2082,6 +2083,7 @@ public class GameBoard extends GameFrame implements ActionListener
                 if(num == 3)frameManager.setNextDomino4Invisible();
                 frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
                 picked = true;
+                setDoThis("The computer has picked tile #" + (num+1) + ", please end turn to continue");
                 enableEndTurn();// TEMPORARY 
     		}
     	}
@@ -2131,6 +2133,145 @@ public class GameBoard extends GameFrame implements ActionListener
         }
         return totalScore;
     }
+    
+    public void doHardAIaction()
+    {
+    	//if first round, pick from current pile and enable end turn
+    	//if not first round, place tile, pick next tile and enable end turn
+    	if (frameManager.getRoundStatus().equals("starting round") && frameManager.currentDominosAvailable() && !(frameManager.getPlayerTookTurn(frameManager.getPlayerNumber(this)))){
+    		AIpickTile();
+    	} else {
+    		AIplaceTile();        // Hard AI selects tiles similar to what it has
+    		hardAIpickNextTile();
+    	}
+    }
+    
+    public void hardAIplaceTile()
+    {
+    	
+    }
+    
+    public void hardAIpickNextTile()
+    {
+    	ArrayList <Color> biomes = new ArrayList<Color>();
+    	ArrayList <Integer> count = new ArrayList<Integer>();
+    	
+    	biomes.add(Color.BLUE);
+    	biomes.add(Color.GREEN);
+    	biomes.add(Color.CYAN);
+    	biomes.add(Color.YELLOW);
+    	biomes.add(Color.BLACK);
+    	biomes.add(Color.LIGHT_GRAY);
+    	
+    	count.add(0);
+    	count.add(0);
+    	count.add(0);
+    	count.add(0);
+    	count.add(0);
+    	count.add(0);
+    	
+    	for(int i = 0; i < ROWS; ++i){
+            for(int j = 0; j < COLUMNS; ++j){
+            	if(gridSquares[i][j].getBackground() == Color.BLUE)count.set(0, count.get(0)+1);
+            	if(gridSquares[i][j].getBackground() == Color.GREEN)count.set(1, count.get(1)+1);
+            	if(gridSquares[i][j].getBackground() == Color.CYAN)count.set(2, count.get(2)+1);
+            	if(gridSquares[i][j].getBackground() == Color.YELLOW)count.set(3, count.get(4)+1);
+            	if(gridSquares[i][j].getBackground() == Color.BLACK)count.set(4, count.get(4)+1);
+            	if(gridSquares[i][j].getBackground() == Color.LIGHT_GRAY)count.set(5, count.get(5)+1);
+            }
+    	}
+    	
+    	//check available dominos if they have tile similar to highest most occurring type, then second most occurring type, then pick at random
+    	int size = count.size();
+        for (int i = 0; i < size - 1; i++)
+        	for (int j = 0; j < size - i - 1; j++)
+        	  if (count.get(j) > count.get(j+1)) {
+                
+        		  int tempInt = count.get(j);
+        		  Color tempColor = biomes.get(j);
+              
+        		  count.set(j, count.get(j+1));
+        		  biomes.set(j, biomes.get(j+1));
+              
+        		  count.set(j+1, tempInt);
+        		  biomes.set(j+1, tempColor);
+        		  }
+    	
+    	
+    	Color highest = biomes.get(biomes.size()-1);
+    	Color secondHighest = biomes.get(biomes.size()-2);
+    	if(count.get(count.size()-2)==0) {
+    		secondHighest = Color.WHITE;
+    	}
+    	
+    	//DEBUG
+    	if(highest==Color.BLUE)System.out.println("BLUE");
+    	if(highest==Color.GREEN)System.out.println("GREEN");
+    	if(highest==Color.CYAN)System.out.println("CYAN");
+    	if(highest==Color.YELLOW)System.out.println("YELLOW");
+    	if(highest==Color.BLACK)System.out.println("BLACK");
+    	if(highest==Color.LIGHT_GRAY)System.out.println("LIGHT_GRAY");
+    	if(secondHighest==Color.BLUE)System.out.println("BLUE");
+    	if(secondHighest==Color.GREEN)System.out.println("GREEN");
+    	if(secondHighest==Color.CYAN)System.out.println("CYAN");
+    	if(secondHighest==Color.YELLOW)System.out.println("YELLOW");
+    	if(secondHighest==Color.BLACK)System.out.println("BLACK");
+    	if(secondHighest==Color.LIGHT_GRAY)System.out.println("LIGHT_GRAY");
+    	
+    	boolean picked = false;
+    	if(picked==false) {
+    		for(int i = 0; i <nextDominos.size(); i++ ) {
+        		Domino current = nextDominos.get(i);
+        		if((current.getTile1Color()==highest || current.getTile2Color()==highest) && picked==false) {
+        			frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
+                    if(i == 0)frameManager.setNextDomino1Invisible();
+                    if(i == 1)frameManager.setNextDomino2Invisible();
+                    if(i == 2)frameManager.setNextDomino3Invisible();
+                    if(i == 3)frameManager.setNextDomino4Invisible();
+                    frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
+                    setDoThis("The computer has picked tile #" + (i+1) + ", please end turn to continue");
+                    enableEndTurn();
+                    System.out.println("Did hard pick, chose most frequent tile");//DEBUG
+        			picked = true;
+        		}
+    		}
+    	} else if (picked == false) {
+    		for(int i = 0; i <nextDominos.size(); i++ ) {
+        		Domino current = nextDominos.get(i);
+        		if((current.getTile1Color()==secondHighest || current.getTile2Color()==secondHighest) && picked==false) {
+        			frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
+                    if(i == 0)frameManager.setNextDomino1Invisible();
+                    if(i == 1)frameManager.setNextDomino2Invisible();
+                    if(i == 2)frameManager.setNextDomino3Invisible();
+                    if(i == 3)frameManager.setNextDomino4Invisible();
+                    frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
+                    setDoThis("The computer has picked tile #" + (i+1) + ", please end turn to continue");
+                    enableEndTurn(); 
+                    System.out.println("Did hard pick, chose 2nd most frequent tile");//DEBUG
+                    picked = true;
+        		}
+        	}
+    	} else {
+        	while(picked==false){
+        		int num = rand.nextInt(nextDominos.size());
+        		if(nextDominos.get(num).getAvailable() == true) {
+        			Domino current = nextDominos.get(num);
+                    frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
+                    if(num == 0)frameManager.setNextDomino1Invisible();
+                    if(num == 1)frameManager.setNextDomino2Invisible();
+                    if(num == 2)frameManager.setNextDomino3Invisible();
+                    if(num == 3)frameManager.setNextDomino4Invisible();
+                    frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
+                    picked = true;
+                    setDoThis("The computer has picked tile #" + (num+1) + ", please end turn to continue");
+                    enableEndTurn();
+                    System.out.println("Did hard random pick");//DEBUG
+        		}
+        	}
+    	}
+    }
+
+    
 /*
     public static void main(String[] args) {
         FrameManager frameManager = new FrameManager();

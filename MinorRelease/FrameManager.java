@@ -17,6 +17,7 @@ public class FrameManager
     private SettingsFrame settingsFrame;
     private PlayerSettingsFrame playerSettingsFrame;
     private ResultsFrame resultsFrame;
+    private int AIdifficulty;
 
     public FrameManager(KingDomino kingDomino) throws IOException
     {
@@ -75,10 +76,6 @@ public class FrameManager
     public void showPlayer1GameBoard()
     {
         player1GameBoard.makeVisible();
-        if(player1GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 0) {
-        	System.out.println("AI 1's turn");//DEBUG
-        	player1GameBoard.doAIaction();
-        }
     }
 
     public void hidePlayer1GameBoard()
@@ -90,8 +87,14 @@ public class FrameManager
     {
         player2GameBoard.makeVisible();
         if(player2GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 1) {
-        	System.out.println("AI 2's turn");//DEBUG
-        	player2GameBoard.doAIaction();
+        	if(AIdifficulty==1) {
+        		System.out.println("AI 2 doing hard turn"); //DEBUG
+        		player2GameBoard.doHardAIaction();
+        	}
+        	else {
+        		System.out.println("AI 2 doing easy turn"); //DEBUG
+        		player2GameBoard.doAIaction();
+        	}
         }
     }
 
@@ -104,8 +107,14 @@ public class FrameManager
     {
         player3GameBoard.makeVisible();
         if(player3GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 2) {
-        	System.out.println("AI 3's turn");//DEBUG
-        	player3GameBoard.doAIaction();
+        	if(AIdifficulty==1) {
+        		System.out.println("AI 3 doing hard turn"); //DEBUG
+        		player3GameBoard.doHardAIaction();
+        	}
+        	else {
+        		System.out.println("AI 3 doing easy turn"); //DEBUG
+        		player3GameBoard.doAIaction();
+        	}
         }
     }
 
@@ -118,8 +127,14 @@ public class FrameManager
     {
         player4GameBoard.makeVisible();
         if(player4GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 3) {
-        	System.out.println("AI 4's turn"); //DEBUG
-        	player4GameBoard.doAIaction();
+        	if(AIdifficulty==1) {
+        		System.out.println("AI 4 doing hard turn"); //DEBUG
+        		player4GameBoard.doHardAIaction();
+        	}
+        	else {
+        		System.out.println("AI 4 doing easy turn"); //DEBUG
+        		player4GameBoard.doAIaction();
+        	}
         }
     }
 
@@ -263,6 +278,7 @@ public class FrameManager
     
     public void createAIPlayer(String playerName, Color playerColor, int playerNumber, int difficulty)
     {
+    	AIdifficulty = difficulty;
     	kingDomino.createAIplayer(playerName, playerColor, playerNumber, difficulty);
     	if(playerNumber == 1) {
     		player1GameBoard.setAsAIboard();

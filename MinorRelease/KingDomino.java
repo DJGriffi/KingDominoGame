@@ -54,7 +54,7 @@ public class KingDomino
 
 	public void nextPlayersTurn()
 	{
-
+			System.out.println("Doing next player turn");//DEBUG
 			if(roundStatus.equals("starting round") && currentDominosAvailable()){
 				hideCurrentPlayerBoard();
 
@@ -152,8 +152,6 @@ public class KingDomino
 				hidePreviousPlayerBoard();
 				showCurrentPlayerBoard();	
 			}
-			
-			
 		}
 
 		public void selectNextRndDomino(int player)

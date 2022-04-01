@@ -82,9 +82,8 @@ public class MainFrame extends GameFrame
 
 	private void setUp() 
 	{	
-		
 		setVisible(false);
-		frameManager.showGameModeFrame();
+		frameManager.showPlayerSettingsFrame();
 
 	}
 
