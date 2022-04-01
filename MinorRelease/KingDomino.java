@@ -55,7 +55,6 @@ public class KingDomino implements java.io.Serializable
 
 	public void nextPlayersTurn()
 	{
-			System.out.println("Doing next player turn");//DEBUG
 			if(roundStatus.equals("starting round") && currentDominosAvailable()){
 				hideCurrentPlayerBoard();
 

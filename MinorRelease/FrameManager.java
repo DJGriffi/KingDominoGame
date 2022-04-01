@@ -88,11 +88,9 @@ public class FrameManager implements java.io.Serializable
         player2GameBoard.makeVisible();
         if(player2GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 1) {
         	if(AIdifficulty==1) {
-        		System.out.println("AI 2 doing hard turn"); //DEBUG
         		player2GameBoard.doHardAIaction();
         	}
         	else {
-        		System.out.println("AI 2 doing easy turn"); //DEBUG
         		player2GameBoard.doAIaction();
         	}
         }
@@ -108,11 +106,9 @@ public class FrameManager implements java.io.Serializable
         player3GameBoard.makeVisible();
         if(player3GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 2) {
         	if(AIdifficulty==1) {
-        		System.out.println("AI 3 doing hard turn"); //DEBUG
         		player3GameBoard.doHardAIaction();
         	}
         	else {
-        		System.out.println("AI 3 doing easy turn"); //DEBUG
         		player3GameBoard.doAIaction();
         	}
         }
@@ -128,11 +124,9 @@ public class FrameManager implements java.io.Serializable
         player4GameBoard.makeVisible();
         if(player4GameBoard.isAIboard() == true & kingDomino.getCurrentPlayer() == 3) {
         	if(AIdifficulty==1) {
-        		System.out.println("AI 4 doing hard turn"); //DEBUG
         		player4GameBoard.doHardAIaction();
         	}
         	else {
-        		System.out.println("AI 4 doing easy turn"); //DEBUG
         		player4GameBoard.doAIaction();
         	}
         }
