@@ -2151,7 +2151,7 @@ public class GameBoard extends GameFrame implements ActionListener
     	
     }
     
-    public void hardAIpickNextTile()
+    public int hardAIpickNextTile()
     {
     	ArrayList <Color> biomes = new ArrayList<Color>();
     	ArrayList <Integer> count = new ArrayList<Integer>();
@@ -2218,57 +2218,55 @@ public class GameBoard extends GameFrame implements ActionListener
     	if(secondHighest==Color.BLACK)System.out.println("BLACK");
     	if(secondHighest==Color.LIGHT_GRAY)System.out.println("LIGHT_GRAY");
     	
-    	boolean picked = false;
-    	if(picked==false) {
-    		for(int i = 0; i <nextDominos.size(); i++ ) {
-        		Domino current = nextDominos.get(i);
-        		if((current.getTile1Color()==highest || current.getTile2Color()==highest) && picked==false) {
-        			frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
-                    if(i == 0)frameManager.setNextDomino1Invisible();
-                    if(i == 1)frameManager.setNextDomino2Invisible();
-                    if(i == 2)frameManager.setNextDomino3Invisible();
-                    if(i == 3)frameManager.setNextDomino4Invisible();
-                    frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
-                    setDoThis("The computer has picked tile #" + (i+1) + ", please end turn to continue");
-                    enableEndTurn();
-                    System.out.println("Did hard pick, chose most frequent tile");//DEBUG
-        			picked = true;
-        		}
+    	for(int i = 0; i <nextDominos.size(); i++ ) {
+    		Domino current = nextDominos.get(i);
+    		if((current.getTile1Color()==highest || current.getTile2Color()==highest) && current.getAvailable() == true) {
+    			frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
+                if(i == 0)frameManager.setNextDomino1Invisible();
+                if(i == 1)frameManager.setNextDomino2Invisible();
+                if(i == 2)frameManager.setNextDomino3Invisible();
+                if(i == 3)frameManager.setNextDomino4Invisible();
+                frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
+                setDoThis("The computer has picked tile #" + (i+1) + ", please end turn to continue");
+                enableEndTurn();
+                System.out.println("Did hard pick, chose most frequent tile");//DEBUG
+    			return 1;
     		}
-    	} else if (picked == false) {
-    		for(int i = 0; i <nextDominos.size(); i++ ) {
-        		Domino current = nextDominos.get(i);
-        		if((current.getTile1Color()==secondHighest || current.getTile2Color()==secondHighest) && picked==false) {
-        			frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
-                    if(i == 0)frameManager.setNextDomino1Invisible();
-                    if(i == 1)frameManager.setNextDomino2Invisible();
-                    if(i == 2)frameManager.setNextDomino3Invisible();
-                    if(i == 3)frameManager.setNextDomino4Invisible();
-                    frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
-                    setDoThis("The computer has picked tile #" + (i+1) + ", please end turn to continue");
-                    enableEndTurn(); 
-                    System.out.println("Did hard pick, chose 2nd most frequent tile");//DEBUG
-                    picked = true;
-        		}
-        	}
-    	} else {
-        	while(picked==false){
-        		int num = rand.nextInt(nextDominos.size());
-        		if(nextDominos.get(num).getAvailable() == true) {
-        			Domino current = nextDominos.get(num);
-                    frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
-                    if(num == 0)frameManager.setNextDomino1Invisible();
-                    if(num == 1)frameManager.setNextDomino2Invisible();
-                    if(num == 2)frameManager.setNextDomino3Invisible();
-                    if(num == 3)frameManager.setNextDomino4Invisible();
-                    frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
-                    picked = true;
-                    setDoThis("The computer has picked tile #" + (num+1) + ", please end turn to continue");
-                    enableEndTurn();
-                    System.out.println("Did hard random pick");//DEBUG
-        		}
-        	}
     	}
+    	
+    	for(int i = 0; i <nextDominos.size(); i++ ) {
+    		Domino current = nextDominos.get(i);
+    		if((current.getTile1Color()==secondHighest || current.getTile2Color()==secondHighest) && current.getAvailable() == true) {
+    			frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
+                if(i == 0)frameManager.setNextDomino1Invisible();
+                if(i == 1)frameManager.setNextDomino2Invisible();
+                if(i == 2)frameManager.setNextDomino3Invisible();
+                if(i == 3)frameManager.setNextDomino4Invisible();
+                frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
+                setDoThis("The computer has picked tile #" + (i+1) + ", please end turn to continue");
+                enableEndTurn(); 
+                System.out.println("Did hard pick, chose 2nd most frequent tile");//DEBUG
+                return 1;
+    		}
+    	}
+    	
+    	boolean picked = false;
+    	while(picked==false){
+    		int num = rand.nextInt(nextDominos.size());
+    		if(nextDominos.get(num).getAvailable() == true) {
+    			Domino current = nextDominos.get(num);
+                frameManager.addDominoToPlayer(current, frameManager.getPlayerNumber(this));
+                if(num == 0)frameManager.setNextDomino1Invisible();
+                if(num == 1)frameManager.setNextDomino2Invisible();
+                if(num == 2)frameManager.setNextDomino3Invisible();
+                if(num == 3)frameManager.setNextDomino4Invisible();
+                frameManager.setPlayerTookTurn(frameManager.getPlayerNumber(this), true);
+                setDoThis("The computer has picked tile #" + (num+1) + ", please end turn to continue");
+                enableEndTurn();// TEMPORARY 
+                return 1;
+    		}
+    	}
+    	return 0;
     }
 
     
