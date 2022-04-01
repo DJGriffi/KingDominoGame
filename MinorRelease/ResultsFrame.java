@@ -19,12 +19,9 @@ public class ResultsFrame extends JFrame
 
     public void makeFrame()
     {   
-        Random rand = new Random();
-        int upperBound = 50;
         players = frameManager.getListOfPlayers();
         for (int i = 0;i<frameManager.getNumOfPlayers();i++) 
         {
-            players.get(i).setPoints(rand.nextInt(upperBound));
             buttons[i] = new Button ("" + players.get(i).getName() + " score : " + players.get(i).getPoints());   
             add (buttons[i]);    
         }

@@ -11,6 +11,8 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.*;
+import java.awt.Point;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -50,6 +52,8 @@ public class GameBoard extends GameFrame implements ActionListener
     private ArrayList<Domino> nextDominos; 
     private boolean AIboard;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    static int dRow[] = { -1, 0, 1, 0 };
+    static int dCol[] = { 0, 1, 0, -1 };
 
     public GameBoard(FrameManager frameManager, int playerNum) throws IOException
     {
@@ -66,6 +70,7 @@ public class GameBoard extends GameFrame implements ActionListener
         lastRoundTracker = 0;
         setBounds(100, 100, 2000, 1500);
         getContentPane().setLayout(new BorderLayout());
+        setResizable(true);
         makeBoard();
     }
     
@@ -549,7 +554,7 @@ public class GameBoard extends GameFrame implements ActionListener
         Image startingTile = ImageIO.read(getClass().getResource("/images/StartingTile.png"));
         startingTile = startingTile.getScaledInstance(screenSize.width * 5/8 * 1/9, screenSize.height * 1/9, java.awt.Image.SCALE_SMOOTH); //185, 110
         gridSquares[4][4].setIcon(new ImageIcon(startingTile));
-        gridSquares[4][4].setBackground(Color.BLACK);
+        gridSquares[4][4].setBackground(Color.GRAY);
 
         makeMenuBar();
         pack();
@@ -786,6 +791,7 @@ public class GameBoard extends GameFrame implements ActionListener
                                     placeTile(i, j);
                                     frameManager.setRoundStatus("select domino");
                                     frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+                                    frameManager.getListOfPlayers().get(playerNum-1).setPoints(calculateScore());
                                 }
 
                                 else{
@@ -801,6 +807,7 @@ public class GameBoard extends GameFrame implements ActionListener
                                     placeTile(i,j);
                                     frameManager.setRoundStatus("select domino");
                                     frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+                                    frameManager.getListOfPlayers().get(playerNum-1).setPoints(calculateScore());
                                 }
 
                                 else{
@@ -814,6 +821,7 @@ public class GameBoard extends GameFrame implements ActionListener
                                     placeTile(i,j);
                                     frameManager.setRoundStatus("select domino");
                                     frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+                                    frameManager.getListOfPlayers().get(playerNum-1).setPoints(calculateScore());
                                 }
 
                                 else
@@ -828,6 +836,7 @@ public class GameBoard extends GameFrame implements ActionListener
                                     placeTile(i,j);
                                     frameManager.setRoundStatus("select domino");
                                     frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
+                                    frameManager.getListOfPlayers().get(playerNum-1).setPoints(calculateScore());
                                 }
 
                                 else{
@@ -923,7 +932,7 @@ public class GameBoard extends GameFrame implements ActionListener
         {
             if((j-1)>=0)
             {
-                if ((gridSquares[i][j-1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j-1].getBackground() == Color.BLACK))
+                if ((gridSquares[i][j-1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j-1].getBackground() == Color.GRAY))
                 {
                     return true;
                 }
@@ -932,7 +941,7 @@ public class GameBoard extends GameFrame implements ActionListener
             if((i-1)>=0)
             {   
 
-                if ((gridSquares[i-1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i-1][j].getBackground() == Color.BLACK) || (gridSquares[i-1][j+1].getBackground() == Color.BLACK) || (gridSquares[i-1][j+1].getBackground() == rotateTile6.getBackground()))
+                if ((gridSquares[i-1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i-1][j].getBackground() == Color.GRAY) || (gridSquares[i-1][j+1].getBackground() == Color.GRAY) || (gridSquares[i-1][j+1].getBackground() == rotateTile6.getBackground()))
                 {
                     return true;
                 }
@@ -940,7 +949,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((i+1)<ROWS)
             {
-                if ((gridSquares[i+1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i+1][j].getBackground() == Color.BLACK) || (gridSquares[i+1][j+1].getBackground() == Color.BLACK) || (gridSquares[i+1][j+1].getBackground() == rotateTile6.getBackground()))
+                if ((gridSquares[i+1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i+1][j].getBackground() == Color.GRAY) || (gridSquares[i+1][j+1].getBackground() == Color.GRAY) || (gridSquares[i+1][j+1].getBackground() == rotateTile6.getBackground()))
                 {
                     return true;
                 }
@@ -948,7 +957,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((j+2)<COLUMNS)
             {
-                if ((gridSquares[i][j+2].getBackground() == Color.BLACK) || (gridSquares[i][j+2].getBackground() == rotateTile6.getBackground()))
+                if ((gridSquares[i][j+2].getBackground() == Color.GRAY) || (gridSquares[i][j+2].getBackground() == rotateTile6.getBackground()))
                 {
                     return true;
                 }
@@ -962,7 +971,7 @@ public class GameBoard extends GameFrame implements ActionListener
         {
              if((j+1)<COLUMNS)
             {
-                if ((gridSquares[i][j+1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j+1].getBackground() == Color.BLACK))
+                if ((gridSquares[i][j+1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j+1].getBackground() == Color.GRAY))
                 {
                     return true;
                 }
@@ -971,7 +980,7 @@ public class GameBoard extends GameFrame implements ActionListener
             if((i-1)>=0)
             {   
 
-                if ((gridSquares[i-1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i-1][j].getBackground() == Color.BLACK) || (gridSquares[i-1][j-1].getBackground() == Color.BLACK) || (gridSquares[i-1][j-1].getBackground() == rotateTile2.getBackground()))
+                if ((gridSquares[i-1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i-1][j].getBackground() == Color.GRAY) || (gridSquares[i-1][j-1].getBackground() == Color.GRAY) || (gridSquares[i-1][j-1].getBackground() == rotateTile2.getBackground()))
                 {
                     return true;
                 }
@@ -979,7 +988,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((i+1)<ROWS)
             {
-                if ((gridSquares[i+1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i+1][j].getBackground() == Color.BLACK) || (gridSquares[i+1][j-1].getBackground() == Color.BLACK) || (gridSquares[i+1][j-1].getBackground() == rotateTile2.getBackground()))
+                if ((gridSquares[i+1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i+1][j].getBackground() == Color.GRAY) || (gridSquares[i+1][j-1].getBackground() == Color.GRAY) || (gridSquares[i+1][j-1].getBackground() == rotateTile2.getBackground()))
                 {
                     return true;
                 }
@@ -987,7 +996,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((j-2) >= 0)
             {
-                if ((gridSquares[i][j-2].getBackground() == Color.BLACK) || (gridSquares[i][j-2].getBackground() == rotateTile2.getBackground()))
+                if ((gridSquares[i][j-2].getBackground() == Color.GRAY) || (gridSquares[i][j-2].getBackground() == rotateTile2.getBackground()))
                 {
                     return true;
                 }
@@ -1000,7 +1009,7 @@ public class GameBoard extends GameFrame implements ActionListener
         {
             if((i-1)>=0)
             {
-                if ((gridSquares[i-1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i-1][j].getBackground() == Color.BLACK))
+                if ((gridSquares[i-1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i-1][j].getBackground() == Color.GRAY))
                 {
                     return true;
                 }
@@ -1009,7 +1018,7 @@ public class GameBoard extends GameFrame implements ActionListener
             if((j-1)>=0)
             {   
 
-                if ((gridSquares[i][j-1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j-1].getBackground() == Color.BLACK) || (gridSquares[i+1][j-1].getBackground() == Color.BLACK) || (gridSquares[i+1][j-1].getBackground() == rotateTile8.getBackground()))
+                if ((gridSquares[i][j-1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j-1].getBackground() == Color.GRAY) || (gridSquares[i+1][j-1].getBackground() == Color.GRAY) || (gridSquares[i+1][j-1].getBackground() == rotateTile8.getBackground()))
                 {
                     return true;
                 }
@@ -1017,7 +1026,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((j+1)<COLUMNS)
             {
-                if ((gridSquares[i][j+1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j+1].getBackground() == Color.BLACK) || (gridSquares[i+1][j+1].getBackground() == Color.BLACK) || (gridSquares[i+1][j+1].getBackground() == rotateTile8.getBackground()))
+                if ((gridSquares[i][j+1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j+1].getBackground() == Color.GRAY) || (gridSquares[i+1][j+1].getBackground() == Color.GRAY) || (gridSquares[i+1][j+1].getBackground() == rotateTile8.getBackground()))
                 {
                     return true;
                 }
@@ -1025,7 +1034,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((i+2)<ROWS)
             {
-                if ((gridSquares[i+2][j].getBackground() == Color.BLACK) || (gridSquares[i+2][j].getBackground() == rotateTile8.getBackground()))
+                if ((gridSquares[i+2][j].getBackground() == Color.GRAY) || (gridSquares[i+2][j].getBackground() == rotateTile8.getBackground()))
                 {
                     return true;
                 }
@@ -1038,7 +1047,7 @@ public class GameBoard extends GameFrame implements ActionListener
         {
             if((i+1)<ROWS)
             {
-                if ((gridSquares[i+1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i+1][j].getBackground() == Color.BLACK))
+                if ((gridSquares[i+1][j].getBackground() == rotateTile5.getBackground()) || (gridSquares[i+1][j].getBackground() == Color.GRAY))
                 {
                     return true;
                 }
@@ -1047,7 +1056,7 @@ public class GameBoard extends GameFrame implements ActionListener
             if((j-1)>=0)
             {   
 
-                if ((gridSquares[i][j-1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j-1].getBackground() == Color.BLACK) || (gridSquares[i-1][j-1].getBackground() == Color.BLACK) || (gridSquares[i-1][j-1].getBackground() == rotateTile2.getBackground()))
+                if ((gridSquares[i][j-1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j-1].getBackground() == Color.GRAY) || (gridSquares[i-1][j-1].getBackground() == Color.GRAY) || (gridSquares[i-1][j-1].getBackground() == rotateTile2.getBackground()))
                 {
                     return true;
                 }
@@ -1055,7 +1064,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((j+1)<COLUMNS)
             {
-                if ((gridSquares[i][j+1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j+1].getBackground() == Color.BLACK) || (gridSquares[i-1][j+1].getBackground() == Color.BLACK) || (gridSquares[i-1][j+1].getBackground() == rotateTile2.getBackground()))
+                if ((gridSquares[i][j+1].getBackground() == rotateTile5.getBackground()) || (gridSquares[i][j+1].getBackground() == Color.GRAY) || (gridSquares[i-1][j+1].getBackground() == Color.GRAY) || (gridSquares[i-1][j+1].getBackground() == rotateTile2.getBackground()))
                 {
                     return true;
                 }
@@ -1063,7 +1072,7 @@ public class GameBoard extends GameFrame implements ActionListener
 
             if((i-2)>=0)
             {
-                if ((gridSquares[i-2][j].getBackground() == Color.BLACK) || (gridSquares[i-2][j].getBackground() == rotateTile2.getBackground()))
+                if ((gridSquares[i-2][j].getBackground() == Color.GRAY) || (gridSquares[i-2][j].getBackground() == rotateTile2.getBackground()))
                 {
                     return true;
                 }
@@ -1487,6 +1496,8 @@ public class GameBoard extends GameFrame implements ActionListener
         {
             gridSquares[i][j].setBackground(rotateTile5.getBackground());
             gridSquares[i][j+1].setBackground(rotateTile6.getBackground());
+            gridSquares[i][j].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile1());
+            gridSquares[i][j+1].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile2());
             gridSquares[i][j].setIcon(rotateTile5.getIcon());
             gridSquares[i][j+1].setIcon(rotateTile6.getIcon());
             rotateTile5.setBackground(Color.WHITE);
@@ -1503,6 +1514,8 @@ public class GameBoard extends GameFrame implements ActionListener
         {
             gridSquares[i][j].setBackground(rotateTile5.getBackground());
             gridSquares[i][j-1].setBackground(rotateTile4.getBackground());
+            gridSquares[i][j].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile1());
+            gridSquares[i][j-1].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile2());
             gridSquares[i][j].setIcon(rotateTile5.getIcon());
             gridSquares[i][j-1].setIcon(rotateTile4.getIcon());
             rotateTile5.setBackground(Color.WHITE);
@@ -1519,6 +1532,8 @@ public class GameBoard extends GameFrame implements ActionListener
         {
             gridSquares[i][j].setBackground(rotateTile5.getBackground());
             gridSquares[i+1][j].setBackground(rotateTile8.getBackground());
+            gridSquares[i][j].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile1());
+            gridSquares[i+1][j].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile2());
             gridSquares[i][j].setIcon(rotateTile5.getIcon());
             gridSquares[i+1][j].setIcon(rotateTile8.getIcon());
             rotateTile5.setBackground(Color.WHITE);
@@ -1535,6 +1550,8 @@ public class GameBoard extends GameFrame implements ActionListener
         {
             gridSquares[i][j].setBackground(rotateTile5.getBackground());
             gridSquares[i-1][j].setBackground(rotateTile2.getBackground());
+            gridSquares[i][j].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile1());
+            gridSquares[i-1][j].setCrowns(frameManager.getCurrentDomino().getNumOfCrownsTile2());
             gridSquares[i][j].setIcon(rotateTile5.getIcon());
             gridSquares[i-1][j].setIcon(rotateTile2.getIcon());
             rotateTile5.setBackground(Color.WHITE);
@@ -2063,6 +2080,51 @@ public class GameBoard extends GameFrame implements ActionListener
                 enableEndTurn();// TEMPORARY 
     		}
     	}
+    }
+
+    public int calculateScore()
+    {
+        int rows = 9;
+        int cols = 9;
+    
+        Queue<Point> q = new LinkedList<>();
+        boolean[][] visited = new boolean[rows][cols];
+    
+        int totalScore = 0;
+        for(int r=0; r<rows; r++)
+        {
+            for(int c=0; c<cols; c++)
+            {
+                if(!visited[r][c])
+                {
+                    q.add(new Point(r, c));
+                    visited[r][c] = true;
+
+                    int crowns = gridSquares[r][c].getCrowns();
+                    int score = 0;
+                    while(!q.isEmpty())
+                    {
+                        Point p = q.poll();
+                        score += 1;
+
+                        for(int d=0; d<4; d++)
+                        {
+                            int i = p.x + dRow[d];
+                            int j = p.y + dCol[d];
+                        
+                            if(i >= 0 && i < rows && j >= 0 && j < cols && !visited[i][j] && (gridSquares[i][j].getBackground() == gridSquares[r][c].getBackground())) 
+                            {
+                                q.add(new Point(i, j));
+                                crowns = crowns + gridSquares[i][j].getCrowns();
+                                visited[i][j] = true;
+                            }
+                        }
+                    }
+                    totalScore = totalScore + (score*crowns);
+                }
+            }
+        }
+        return totalScore;
     }
 /*
     public static void main(String[] args) {

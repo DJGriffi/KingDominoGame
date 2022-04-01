@@ -6,13 +6,14 @@ import javax.swing.JButton;
 public class GridSquares extends JButton
 {
     
-    private int xcoord, ycoord;
+    private int xcoord, ycoord, crowns;
 
     public GridSquares(int y, int x)
     {
         super();
         xcoord = x;
         ycoord = y;
+        crowns = 0;
         setPreferredSize(new Dimension(40,40));
         setMinimumSize(new Dimension(40,40));
         setMaximumSize(new Dimension(40,40));
@@ -24,4 +25,9 @@ public class GridSquares extends JButton
 
     public int getXCoord()  {return xcoord;}
     public int getYCoord()  {return ycoord;}
+    public void setCrowns(int crownCount)  
+    {
+        crowns = crownCount;
+    }
+    public int getCrowns()  {return crowns;}
 }
