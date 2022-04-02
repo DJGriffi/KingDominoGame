@@ -2051,41 +2051,50 @@ public class GameBoard extends GameFrame implements ActionListener
     }
     
     public void hardAIplaceTile()
-    {
+    {   
     	ArrayList<Integer> icords= new ArrayList<>();
     	ArrayList<Integer> jcords= new ArrayList<>();
-    	for(int i = 0; i < ROWS; ++i){
-            for(int j = 0; j < COLUMNS; ++j){
-            	if (gridSquares[i][j].getBackground() == Color.WHITE){
-                    if (rotatingTileOnRight(i, j)){
-                        if (verifyAdjacentSquare(i,j+1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
-                            icords.add(i);
-                            jcords.add(j);
-                        	}
-                        }
-                    else if (rotatingTileOnLeft(i, j)){
-                        if (verifyAdjacentSquare(i,j-1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
-                        	icords.add(i);
-                            jcords.add(j);
-                        	}
-                        }
-                    else if (rotatingTileBelow(i, j)){
+    	for(int num = 0; num < 4 ; num++) {
+        	for(int i = 0; i < ROWS; ++i){
+                for(int j = 0; j < COLUMNS; ++j){
+                	if (gridSquares[i][j].getBackground() == Color.WHITE){
+                        if (rotatingTileOnRight(i, j)){
+                            if (verifyAdjacentSquare(i,j+1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                                icords.add(i);
+                                jcords.add(j);
+                            	}
+                            }
+                        else if (rotatingTileOnLeft(i, j)){
+                            if (verifyAdjacentSquare(i,j-1) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                            	icords.add(i);
+                                jcords.add(j);
+                            	}
+                            }
+                        else if (rotatingTileBelow(i, j)){
 
-                        if (verifyAdjacentSquare(i+1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
-                        	icords.add(i);
-                            jcords.add(j);
-                        	}
-                       	}
-                    else if (rotatingTileOnTop(i, j))
-                    {
-                        if (verifyAdjacentSquare(i-1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
-                        	icords.add(i);
-                            jcords.add(j);
-                        }
+                            if (verifyAdjacentSquare(i+1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                            	icords.add(i);
+                                jcords.add(j);
+                            	}
+                           	}
+                        else if (rotatingTileOnTop(i, j))
+                        {
+                            if (verifyAdjacentSquare(i-1,j) && verifyTerrainRule(i,j) && verifyWithInKingdom(i,j) && verifyDimensions(i,j)){
+                            	icords.add(i);
+                                jcords.add(j);
+                            }
+                            }
                         }
                     }
                 }
-            }
+    		if(icords.size()==0) {
+    			rotateLeft(frameManager.getCurrentDomino());
+    		}
+    		else {
+    			break;
+    		}
+    	}
+
     	if(icords.size()==0) {          //If no placement available, discard domino
     		rotateTile2.setBackground(Color.WHITE);
             rotateTile2.setIcon(null);
@@ -2097,7 +2106,7 @@ public class GameBoard extends GameFrame implements ActionListener
             rotateTile6.setIcon(null);
             rotateTile8.setBackground(Color.WHITE);
             rotateTile8.setIcon(null);
-            //System.out.println("I had to discard the domino :(");   //DEBUG
+            System.out.println("I had to discard the domino :(");   //DEBUG
             frameManager.removeDomino();
             frameManager.setRoundStatus("select domino");
             frameManager.selectNextRndDomino(frameManager.getPlayerNumber(this));
@@ -2167,20 +2176,6 @@ public class GameBoard extends GameFrame implements ActionListener
     	if(count.get(count.size()-2)==0) {
     		secondHighest = Color.WHITE;
     	}
-    	
-    	/*DEBUG
-    	if(highest==Color.BLUE)System.out.println("BLUE");
-    	if(highest==Color.GREEN)System.out.println("GREEN");
-    	if(highest==Color.CYAN)System.out.println("CYAN");
-    	if(highest==Color.YELLOW)System.out.println("YELLOW");
-    	if(highest==Color.BLACK)System.out.println("BLACK");
-    	if(highest==Color.LIGHT_GRAY)System.out.println("LIGHT_GRAY");
-    	if(secondHighest==Color.BLUE)System.out.println("BLUE");
-    	if(secondHighest==Color.GREEN)System.out.println("GREEN");
-    	if(secondHighest==Color.CYAN)System.out.println("CYAN");
-    	if(secondHighest==Color.YELLOW)System.out.println("YELLOW");
-    	if(secondHighest==Color.BLACK)System.out.println("BLACK");
-    	if(secondHighest==Color.LIGHT_GRAY)System.out.println("LIGHT_GRAY");*/
     	
     	for(int i = 0; i <nextDominos.size(); i++ ) {
     		Domino current = nextDominos.get(i);
