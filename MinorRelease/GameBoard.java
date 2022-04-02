@@ -56,6 +56,7 @@ public class GameBoard extends GameFrame implements ActionListener
     public GameBoard(FrameManager frameManager, int playerNum) throws IOException
     {
         super();
+        setResizable(true);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.frameManager = frameManager;
         this.playerNum = playerNum;
@@ -66,9 +67,9 @@ public class GameBoard extends GameFrame implements ActionListener
         leftMostDominoColumn = 4;
         rightMostDominoColumn = 4;
         lastRoundTracker = 0;
-        setBounds(100, 100, 2000, 1500);
+        //setBounds(100, 100, 2000, 1500);
         getContentPane().setLayout(new BorderLayout());
-        setResizable(true);
+        //setResizable(true);
         makeBoard();
     }
     

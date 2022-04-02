@@ -25,7 +25,6 @@ public class GameFrame extends JFrame implements java.io.Serializable
     {
         super();
         setBounds(100, 100, 700, 700);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         splash = ImageIO.read(getClass().getResource("/images/Title.png"));
         splash = splash.getScaledInstance(700, 700, java.awt.Image.SCALE_SMOOTH);
@@ -38,7 +37,7 @@ public class GameFrame extends JFrame implements java.io.Serializable
         });
 		getContentPane().setLayout(new GridBagLayout());
         setColours();
-        setResizable(true);
+        setResizable(false);
 
     }
 
