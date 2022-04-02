@@ -14,9 +14,8 @@ that there are enough symbols on the dominoes to differentiate between them.
 realizing that different game modes are not required for the project, we have excluded that class from our final jar file. However, the source code of that class is still present as it can be
 used for future versions of the game.
 
-6. The colourConfiguration.txt file must live in the same folder as the jar/java files.
+6. The colourConfiguration.txt and savedGame.ser file and images folder must live in the same folder as the jar/java files.
 
 7. Run the KingDomino.jar file via commandline interpreter (console/terminal) with command 'java -jar KingDomino.jar' (without the quotes)
-If the jar file does not execute for some reason, download all .java files and the colourConfiguration.txt file into the same folder. Via a console/terminal
-use the command 'javac *.java' (without quotes) and then use 'java Driver' (without quotes).
+If the jar file does not execute for some reason, download all .java files, the colourConfiguration.txt, savedGame.ser files and images folder into the same folder. Via a console/terminal use the command 'javac *.java' (without quotes) and then use 'java Driver' (without quotes).
 
